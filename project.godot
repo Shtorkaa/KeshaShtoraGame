@@ -11,5 +11,7 @@ config_version=5
 [application]
 
 config/name="Lunacity"
+run/main_scene="res://Scenes/Levels/Level1.tscn"
 config/features=PackedStringArray("4.3", "Forward Plus")
+boot_splash/bg_color=Color(1, 1, 1, 1)
 config/icon="res://icon.svg"

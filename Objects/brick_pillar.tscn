@@ -1,0 +1,17 @@
+[gd_scene load_steps=4 format=3 uid="uid://d21s47xcdbftb"]
+
+[ext_resource type="PackedScene" uid="uid://divjpd75uryeo" path="res://Objects/BrickBase.tscn" id="1_u5u12"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_xghlx"]
+
+[sub_resource type="BoxMesh" id="BoxMesh_jirta"]
+
+[node name="BrickBase" instance=ExtResource("1_u5u12")]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="." index="0"]
+transform = Transform3D(0.5, 0, 0, 0, 2.1, 0, 0, 0, 0.5, 0, 0, 0)
+shape = SubResource("BoxShape3D_xghlx")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="." index="1"]
+transform = Transform3D(0.5, 0, 0, 0, 2.1, 0, 0, 0, 0.5, 0, 0, 0)
+mesh = SubResource("BoxMesh_jirta")
