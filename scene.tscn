@@ -1,9 +1,19 @@
-[gd_scene load_steps=2 format=3 uid="uid://4bm00lqekqmo"]
+[gd_scene load_steps=4 format=3 uid="uid://4bm00lqekqmo"]
 
 [ext_resource type="Texture2D" uid="uid://cfh5j8r07socv" path="res://661102.76_24451_456324210.jpg" id="1_i0vm7"]
+[ext_resource type="Texture2D" uid="uid://mnwmvxxsar0b" path="res://медведь-гол-гоооол.png" id="2_shen2"]
+[ext_resource type="AudioStream" uid="uid://drh4e4dwxku0g" path="res://goooool_gRygBSS.mp3" id="3_obem1"]
 
 [node name="Node3D" type="Node3D"]
 
 [node name="Sprite3D" type="Sprite3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.672459, 0)
 texture = ExtResource("1_i0vm7")
+
+[node name="GOOOOOOOL" type="Sprite3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.95179, 0.672459, -2.72041)
+texture = ExtResource("2_shen2")
+
+[node name="GOOL" type="AudioStreamPlayer" parent="GOOOOOOOL"]
+stream = ExtResource("3_obem1")
+autoplay = true
