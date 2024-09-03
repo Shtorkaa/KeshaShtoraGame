@@ -1,12 +1,12 @@
-[gd_scene load_steps=5 format=3 uid="uid://4bm00lqekqmo"]
+[gd_scene load_steps=6 format=3 uid="uid://4bm00lqekqmo"]
 
 [ext_resource type="Texture2D" uid="uid://cfh5j8r07socv" path="res://661102.76_24451_456324210.jpg" id="1_i0vm7"]
 [ext_resource type="Texture2D" uid="uid://mnwmvxxsar0b" path="res://медведь-гол-гоооол.png" id="2_shen2"]
+[ext_resource type="Script" path="res://goooooool.gd" id="3_1tbxh"]
 [ext_resource type="AudioStream" uid="uid://drh4e4dwxku0g" path="res://goooool_gRygBSS.mp3" id="3_obem1"]
 
 [sub_resource type="Environment" id="Environment_afqft"]
 background_mode = 1
-background_color = Color(1, 1, 1, 1)
 
 [node name="Node3D" type="Node3D"]
 
@@ -17,6 +17,7 @@ texture = ExtResource("1_i0vm7")
 [node name="GOOOOOOOL" type="Sprite3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.95179, 0.672459, -2.72041)
 texture = ExtResource("2_shen2")
+script = ExtResource("3_1tbxh")
 
 [node name="GOOL" type="AudioStreamPlayer" parent="GOOOOOOOL"]
 stream = ExtResource("3_obem1")
