@@ -1,0 +1,37 @@
+[gd_scene load_steps=6 format=3 uid="uid://4bm00lqekqmo"]
+
+[ext_resource type="Script" path="res://Script/Paddle.gd" id="1_vgrb1"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_n0cf4"]
+size = Vector3(5, 0.5, 1)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_5h7jw"]
+albedo_color = Color(0.0923971, 0.0923971, 0.0923971, 1)
+
+[sub_resource type="BoxMesh" id="BoxMesh_3ncn3"]
+material = SubResource("StandardMaterial3D_5h7jw")
+size = Vector3(5, 0.5, 1)
+
+[sub_resource type="Environment" id="Environment_mhmr0"]
+background_mode = 1
+background_color = Color(0.872788, 0.747398, 0.767287, 1)
+
+[node name="Demo" type="Node3D"]
+
+[node name="Paddle" type="StaticBody3D" parent="."]
+script = ExtResource("1_vgrb1")
+
+[node name="Hitbox" type="CollisionShape3D" parent="Paddle"]
+shape = SubResource("BoxShape3D_n0cf4")
+
+[node name="Model" type="MeshInstance3D" parent="Paddle"]
+mesh = SubResource("BoxMesh_3ncn3")
+
+[node name="Camera" type="Camera3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 0.991709, 0.128501, 0, -0.128501, 0.991709, 0, 2.6327, 4.27912)
+
+[node name="Sun" type="DirectionalLight3D" parent="."]
+transform = Transform3D(0.776531, 0.488666, -0.397751, 0.125499, 0.498667, 0.85766, 0.617455, -0.715917, 0.325903, 0, 0, 0)
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_mhmr0")

@@ -1,0 +1,116 @@
+[gd_scene load_steps=13 format=3 uid="uid://4bm00lqekqmo"]
+
+[ext_resource type="Script" path="res://Script/Ball.gd" id="1_4fqvl"]
+[ext_resource type="Script" path="res://Script/Paddle.gd" id="1_vgrb1"]
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_j2o31"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_3sr7n"]
+albedo_color = Color(0.733333, 0.439216, 0.490196, 1)
+
+[sub_resource type="SphereMesh" id="SphereMesh_a4t47"]
+material = SubResource("StandardMaterial3D_3sr7n")
+radial_segments = 8
+rings = 8
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_n0cf4"]
+size = Vector3(5, 0.5, 1)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_5h7jw"]
+albedo_color = Color(0.0923971, 0.0923971, 0.0923971, 1)
+
+[sub_resource type="BoxMesh" id="BoxMesh_3ncn3"]
+material = SubResource("StandardMaterial3D_5h7jw")
+size = Vector3(5, 0.5, 1)
+
+[sub_resource type="Environment" id="Environment_mhmr0"]
+background_mode = 1
+background_color = Color(0.872788, 0.747398, 0.767287, 1)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_jtqhj"]
+size = Vector3(100, 10, 1)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_j2yse"]
+albedo_color = Color(0, 0, 0, 1)
+
+[sub_resource type="BoxMesh" id="BoxMesh_52au3"]
+material = SubResource("StandardMaterial3D_j2yse")
+size = Vector3(100, 10, 1)
+
+[node name="Demo" type="Node3D"]
+
+[node name="Ball" type="RigidBody3D" parent="."]
+transform = Transform3D(0.978148, 0, 0.207912, 0, 1, 0, -0.207912, 0, 0.978148, 0, 0, 5)
+axis_lock_linear_y = true
+axis_lock_angular_x = true
+axis_lock_angular_y = true
+axis_lock_angular_z = true
+gravity_scale = 0.0
+contact_monitor = true
+max_contacts_reported = 10
+script = ExtResource("1_4fqvl")
+metadata/Speed = 8.0
+
+[node name="Hitbox" type="CollisionShape3D" parent="Ball"]
+shape = SubResource("SphereShape3D_j2o31")
+
+[node name="Model" type="MeshInstance3D" parent="Ball"]
+mesh = SubResource("SphereMesh_a4t47")
+
+[node name="Paddle" type="StaticBody3D" parent="."]
+transform = Transform3D(0.924466, 0, 0.381264, 0, 1, 0, -0.381264, 0, 0.924466, 0, 0, 0)
+script = ExtResource("1_vgrb1")
+metadata/PositionMin = Vector3(-4, 0, 0)
+metadata/PositionMax = Vector3(4, 0, 0)
+metadata/Speed = 10.0
+metadata/BallVelocityMultiplier = 1.25
+
+[node name="Hitbox" type="CollisionShape3D" parent="Paddle"]
+shape = SubResource("BoxShape3D_n0cf4")
+
+[node name="Model" type="MeshInstance3D" parent="Paddle"]
+mesh = SubResource("BoxMesh_3ncn3")
+
+[node name="CollisionNormal" type="Marker3D" parent="Paddle"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 1)
+
+[node name="Camera" type="Camera3D" parent="."]
+transform = Transform3D(-1, -4.612e-16, -8.74228e-08, -5.03297e-08, 0.817658, 0.575705, 7.14819e-08, 0.575705, -0.817658, 0, 7.70342, -5.57935)
+
+[node name="Sun" type="DirectionalLight3D" parent="."]
+transform = Transform3D(0.776531, 0.488666, -0.397751, 0.125499, 0.498667, 0.85766, 0.617455, -0.715917, 0.325903, 0, 0, 0)
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_mhmr0")
+
+[node name="Wall1" type="StaticBody3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 22.6286)
+
+[node name="Hitbox" type="CollisionShape3D" parent="Wall1"]
+shape = SubResource("BoxShape3D_jtqhj")
+
+[node name="Model" type="MeshInstance3D" parent="Wall1"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0)
+mesh = SubResource("BoxMesh_52au3")
+
+[node name="Wall2" type="StaticBody3D" parent="."]
+transform = Transform3D(0.121488, 0, 0.992593, 0, 1, 0, -0.992593, 0, 0.121488, 6.63845, 0, 23.3998)
+
+[node name="Model" type="MeshInstance3D" parent="Wall2"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0)
+mesh = SubResource("BoxMesh_52au3")
+
+[node name="Hitbox" type="CollisionShape3D" parent="Wall2"]
+shape = SubResource("BoxShape3D_jtqhj")
+
+[node name="Wall3" type="StaticBody3D" parent="."]
+transform = Transform3D(0.1249, 0, 0.992169, 0, 1, 0, -0.992169, 0, 0.1249, -9.78475, 0, 23.3998)
+
+[node name="Hitbox" type="CollisionShape3D" parent="Wall3"]
+shape = SubResource("BoxShape3D_jtqhj")
+
+[node name="Model" type="MeshInstance3D" parent="Wall3"]
+transform = Transform3D(1, 0, -3.55271e-15, 0, 1, 0, 3.55271e-15, 0, 1, 0, 0, 0)
+mesh = SubResource("BoxMesh_52au3")
+
+[connection signal="body_entered" from="Ball" to="Ball" method="_on_body_entered"]
