@@ -2,20 +2,20 @@ extends RigidBody3D
 
 var MetaPosition = Vector3.ZERO
 
-func MoveForward(DeltaTime: float = 1.0) -> KinematicCollision3D:
-	var FORWARD = -get_global_transform().basis.z
-	
-	return move_and_collide(FORWARD * get_meta('Speed') * DeltaTime)
+#func MoveForward(DeltaTime: float = 1.0) -> KinematicCollision3D:
+	#var FORWARD = -get_global_transform().basis.z
+	#
+	#return move_and_collide(FORWARD * get_meta('Speed') * DeltaTime)
+
+var dir = -get_global_transform().basis.z
 
 func _physics_process(DeltaTime: float):
-	
-	var Collision = MoveForward(DeltaTime)
+	var Collision = move_and_collide(dir * get_meta('Speed') * DeltaTime)
 	
 	if Collision:
-		print(Collision.get_normal())
-		rotate(Vector3(0, 1, 0), deg_to_rad(90 + rotation.y + 45 + rad_to_deg(Collision.get_collider().rotation.y) * 3))
+		var axis = Vector3(1, 0, 0) 
+		dir = dir.bounce(Collision.get_normal())
 		position = MetaPosition
-		# set_meta("Speed", clamp(get_meta("Speed") * 1.25, 0, 60))
 	
 	MetaPosition = position
 
