@@ -15,7 +15,7 @@ func round_to_dec(num, digit):
 
 # Base game
 
-func SillyFreeze(TimeScale:float = 0.035):
+func SillyFreeze(TimeScale:float = 0.02):
 	Engine.time_scale = TimeScale
 	var SillyFreezeTimer = get_tree().create_timer(0.02)
 	await SillyFreezeTimer.timeout

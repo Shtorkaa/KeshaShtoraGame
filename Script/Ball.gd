@@ -13,7 +13,7 @@ func _physics_process(DeltaTime: float):
 	if collision:
 		var collider = collision.get_collider()
 		
-		Game.SillyFreeze(0.1)
+		Game.SillyFreeze(0.05)
 		
 		if collider is Brick:
 			collider.destroy()
