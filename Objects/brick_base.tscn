@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://divjpd75uryeo"]
+
+[ext_resource type="Script" path="res://Script/Brick.gd" id="1_4geke"]
+
+[node name="Brick" type="RigidBody3D"]
+script = ExtResource("1_4geke")

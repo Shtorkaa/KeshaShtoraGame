@@ -1,0 +1,31 @@
+[gd_scene load_steps=7 format=3 uid="uid://dpv8eyyf4bdnl"]
+
+[ext_resource type="Script" path="res://Script/Eraser.gd" id="1_orwad"]
+[ext_resource type="Texture2D" uid="uid://lntl3ll07sbq" path="res://Sprites/Eraser.png" id="2_atu2v"]
+[ext_resource type="AudioStream" uid="uid://c688vdwt8j8rn" path="res://Sounds/useless_FnNccgd.mp3" id="3_xm11m"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_12nye"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_vbbru"]
+albedo_texture = ExtResource("2_atu2v")
+
+[sub_resource type="QuadMesh" id="QuadMesh_plscr"]
+
+[node name="Eraser" type="Area3D"]
+monitorable = false
+script = ExtResource("1_orwad")
+
+[node name="Hitbox" type="CollisionShape3D" parent="."]
+transform = Transform3D(30, 0, 0, 0, 6, 0, 0, 0, 1, 0, 3, 0.5)
+shape = SubResource("BoxShape3D_12nye")
+
+[node name="Model" type="MeshInstance3D" parent="."]
+transform = Transform3D(-30, 0, -2.62268e-06, 0, 6, 0, 8.74228e-08, 0, -1, 0, 3, 0)
+material_override = SubResource("StandardMaterial3D_vbbru")
+mesh = SubResource("QuadMesh_plscr")
+skeleton = NodePath("")
+
+[node name="UselessFnNccgd" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("3_xm11m")
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]

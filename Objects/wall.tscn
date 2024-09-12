@@ -1,0 +1,25 @@
+[gd_scene load_steps=6 format=3 uid="uid://3v7yyyi1y64u"]
+
+[ext_resource type="Script" path="res://Script/Wall.gd" id="1_op5el"]
+[ext_resource type="Texture2D" uid="uid://boucrpcswrbcx" path="res://Sprites/Wall.jpg" id="1_vfgsv"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_12nye"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_ubqjk"]
+albedo_texture = ExtResource("1_vfgsv")
+
+[sub_resource type="QuadMesh" id="QuadMesh_plscr"]
+flip_faces = true
+
+[node name="Wall" type="StaticBody3D"]
+transform = Transform3D(30, 0, 0, 0, 6, 0, 0, 0, 1, 0, 0, 0)
+script = ExtResource("1_op5el")
+
+[node name="Hitbox" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 0.5)
+shape = SubResource("BoxShape3D_12nye")
+
+[node name="Model" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 0)
+material_override = SubResource("StandardMaterial3D_ubqjk")
+mesh = SubResource("QuadMesh_plscr")

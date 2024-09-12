@@ -1,0 +1,28 @@
+[gd_scene load_steps=5 format=3 uid="uid://c3f0r8mk1rw5b"]
+
+[ext_resource type="Script" path="res://Script/Paddle.gd" id="1_s3734"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_n0cf4"]
+size = Vector3(5, 0.5, 1)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_5h7jw"]
+albedo_color = Color(0.0923971, 0.0923971, 0.0923971, 1)
+
+[sub_resource type="BoxMesh" id="BoxMesh_3ncn3"]
+material = SubResource("StandardMaterial3D_5h7jw")
+size = Vector3(5, 0.5, 1)
+
+[node name="Paddle" type="StaticBody3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.25, 0)
+axis_lock_linear_y = true
+axis_lock_linear_z = true
+axis_lock_angular_x = true
+axis_lock_angular_z = true
+script = ExtResource("1_s3734")
+metadata/BallSpeedMultiplier = 1.25
+
+[node name="Hitbox" type="CollisionShape3D" parent="."]
+shape = SubResource("BoxShape3D_n0cf4")
+
+[node name="Model" type="MeshInstance3D" parent="."]
+mesh = SubResource("BoxMesh_3ncn3")

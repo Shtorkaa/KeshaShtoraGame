@@ -1,0 +1,42 @@
+[gd_scene load_steps=8 format=3 uid="uid://cl12k28cwwvko"]
+
+[ext_resource type="Script" path="res://Script/Ball.gd" id="1_eet82"]
+[ext_resource type="AudioStream" uid="uid://cmmuaalksgik3" path="res://Sounds/parry-ultrakill.mp3" id="2_1bpmh"]
+[ext_resource type="AudioStream" uid="uid://ud08iqp8n08t" path="res://Sounds/destroy_8pkWYMG.mp3" id="3_wujke"]
+[ext_resource type="AudioStream" uid="uid://5vqmikpcde1x" path="res://Sounds/you-cant-escape_2HXFfar.mp3" id="4_rggd7"]
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_j2o31"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_3sr7n"]
+albedo_color = Color(0.733333, 0.439216, 0.490196, 1)
+
+[sub_resource type="SphereMesh" id="SphereMesh_a4t47"]
+material = SubResource("StandardMaterial3D_3sr7n")
+radial_segments = 8
+rings = 8
+
+[node name="Ball" type="RigidBody3D"]
+transform = Transform3D(0.978148, 0, 0.207912, 0, 1, 0, -0.207912, 0, 0.978148, 0, 0, 5)
+axis_lock_linear_y = true
+axis_lock_angular_x = true
+axis_lock_angular_y = true
+axis_lock_angular_z = true
+gravity_scale = 0.0
+contact_monitor = true
+max_contacts_reported = 10
+script = ExtResource("1_eet82")
+
+[node name="Hitbox" type="CollisionShape3D" parent="."]
+shape = SubResource("SphereShape3D_j2o31")
+
+[node name="Model" type="MeshInstance3D" parent="."]
+mesh = SubResource("SphereMesh_a4t47")
+
+[node name="Parry-ultrakill" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("2_1bpmh")
+
+[node name="Destroy8PkWymg" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("3_wujke")
+
+[node name="You-cant-escape2hxFfar" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("4_rggd7")

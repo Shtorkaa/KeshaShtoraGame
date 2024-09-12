@@ -1,9 +1,10 @@
 [gd_scene load_steps=5 format=3 uid="uid://fldnu6mrdfx5"]
 
-[ext_resource type="PackedScene" uid="uid://cvuwjmml806v" path="res://Objects/Brick_cube.tscn" id="1_wnra1"]
-[ext_resource type="Script" path="res://Scenes/Levels/camera_3d_freemove.gd" id="2_1rvjn"]
+[ext_resource type="PackedScene" uid="uid://cvuwjmml806v" path="res://Objects/brick_cube.tscn" id="1_wnra1"]
+[ext_resource type="Script" path="res://Script/CameraFreedom.gd" id="2_1rvjn"]
 [ext_resource type="PackedScene" uid="uid://bc525q7tohwt4" path="res://Objects/brick_base_static.tscn" id="3_8elnp"]
 [ext_resource type="PackedScene" uid="uid://d21s47xcdbftb" path="res://Objects/brick_pillar.tscn" id="4_bybyh"]
+
 
 [node name="Level1" type="Node3D"]
 

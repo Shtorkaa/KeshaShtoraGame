@@ -1,114 +1,118 @@
-[gd_scene load_steps=13 format=3 uid="uid://4bm00lqekqmo"]
+[gd_scene load_steps=9 format=3 uid="uid://4bm00lqekqmo"]
 
-[ext_resource type="Script" path="res://Script/Ball.gd" id="1_4fqvl"]
-[ext_resource type="Script" path="res://Script/Paddle.gd" id="1_vgrb1"]
-
-[sub_resource type="SphereShape3D" id="SphereShape3D_j2o31"]
-
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_3sr7n"]
-albedo_color = Color(0.733333, 0.439216, 0.490196, 1)
-
-[sub_resource type="SphereMesh" id="SphereMesh_a4t47"]
-material = SubResource("StandardMaterial3D_3sr7n")
-radial_segments = 8
-rings = 8
-
-[sub_resource type="BoxShape3D" id="BoxShape3D_n0cf4"]
-size = Vector3(5, 0.5, 1)
-
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_5h7jw"]
-albedo_color = Color(0.0923971, 0.0923971, 0.0923971, 1)
-
-[sub_resource type="BoxMesh" id="BoxMesh_3ncn3"]
-material = SubResource("StandardMaterial3D_5h7jw")
-size = Vector3(5, 0.5, 1)
+[ext_resource type="PackedScene" uid="uid://c3f0r8mk1rw5b" path="res://Objects/paddle.tscn" id="1_0ufe6"]
+[ext_resource type="PackedScene" uid="uid://3v7yyyi1y64u" path="res://Objects/wall.tscn" id="3_34q70"]
+[ext_resource type="Script" path="res://Script/BallSpawner.gd" id="4_grcpb"]
+[ext_resource type="PackedScene" uid="uid://cvuwjmml806v" path="res://Objects/brick_cube.tscn" id="4_tee3d"]
+[ext_resource type="AudioStream" uid="uid://ctugow7j5pa78" path="res://Sounds/prepare-thyself.mp3" id="5_ilkq2"]
+[ext_resource type="PackedScene" uid="uid://dpv8eyyf4bdnl" path="res://Objects/eraser.tscn" id="6_pbsx2"]
 
 [sub_resource type="Environment" id="Environment_mhmr0"]
 background_mode = 1
-background_color = Color(0.872788, 0.747398, 0.767287, 1)
+background_color = Color(0.967035, 0.754247, 0.363371, 1)
 
-[sub_resource type="BoxShape3D" id="BoxShape3D_jtqhj"]
-size = Vector3(100, 10, 1)
+[sub_resource type="WorldBoundaryShape3D" id="WorldBoundaryShape3D_oo5gt"]
 
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_j2yse"]
-albedo_color = Color(0, 0, 0, 1)
+[node name="LEVEL" type="Node3D"]
 
-[sub_resource type="BoxMesh" id="BoxMesh_52au3"]
-material = SubResource("StandardMaterial3D_j2yse")
-size = Vector3(100, 10, 1)
+[node name="Environment" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_mhmr0")
 
-[node name="Demo" type="Node3D"]
-
-[node name="Ball" type="RigidBody3D" parent="."]
-transform = Transform3D(0.978148, 0, 0.207912, 0, 1, 0, -0.207912, 0, 0.978148, 0, 0, 5)
-axis_lock_linear_y = true
-axis_lock_angular_x = true
-axis_lock_angular_y = true
-axis_lock_angular_z = true
-gravity_scale = 0.0
-contact_monitor = true
-max_contacts_reported = 10
-script = ExtResource("1_4fqvl")
-metadata/Speed = 8.0
-
-[node name="Hitbox" type="CollisionShape3D" parent="Ball"]
-shape = SubResource("SphereShape3D_j2o31")
-
-[node name="Model" type="MeshInstance3D" parent="Ball"]
-mesh = SubResource("SphereMesh_a4t47")
-
-[node name="Paddle" type="StaticBody3D" parent="."]
-transform = Transform3D(0.924466, 0, 0.381264, 0, 1, 0, -0.381264, 0, 0.924466, 0, 0, 0)
-script = ExtResource("1_vgrb1")
-metadata/PositionMin = Vector3(-4, 0, 0)
-metadata/PositionMax = Vector3(4, 0, 0)
-metadata/Speed = 10.0
-metadata/BallVelocityMultiplier = 1.25
-
-[node name="Hitbox" type="CollisionShape3D" parent="Paddle"]
-shape = SubResource("BoxShape3D_n0cf4")
-
-[node name="Model" type="MeshInstance3D" parent="Paddle"]
-mesh = SubResource("BoxMesh_3ncn3")
-
-[node name="CollisionNormal" type="Marker3D" parent="Paddle"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 1)
+[node name="Sun" type="DirectionalLight3D" parent="."]
+transform = Transform3D(-0.987577, 0.145189, 0.0600925, 0.125499, 0.498667, 0.85766, 0.0945559, 0.854548, -0.510694, 0, 0, 0)
 
 [node name="Camera" type="Camera3D" parent="."]
 transform = Transform3D(-1, -4.612e-16, -8.74228e-08, -5.03297e-08, 0.817658, 0.575705, 7.14819e-08, 0.575705, -0.817658, 0, 7.70342, -5.57935)
 
-[node name="Sun" type="DirectionalLight3D" parent="."]
-transform = Transform3D(0.776531, 0.488666, -0.397751, 0.125499, 0.498667, 0.85766, 0.617455, -0.715917, 0.325903, 0, 0, 0)
+[node name="Paddle" parent="." instance=ExtResource("1_0ufe6")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.25, -2.04279)
 
-[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
-environment = SubResource("Environment_mhmr0")
+[node name="BallSpawner" type="StaticBody3D" parent="."]
+script = ExtResource("4_grcpb")
 
-[node name="Wall1" type="StaticBody3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 22.6286)
+[node name="Cooldown" type="Timer" parent="BallSpawner"]
+wait_time = 5.0
+autostart = true
 
-[node name="Hitbox" type="CollisionShape3D" parent="Wall1"]
-shape = SubResource("BoxShape3D_jtqhj")
+[node name="Ground" type="StaticBody3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.5, 0)
 
-[node name="Model" type="MeshInstance3D" parent="Wall1"]
-mesh = SubResource("BoxMesh_52au3")
+[node name="Hitbox" type="CollisionShape3D" parent="Ground"]
+shape = SubResource("WorldBoundaryShape3D_oo5gt")
 
-[node name="Wall2" type="StaticBody3D" parent="."]
-transform = Transform3D(0.121488, 0, 0.992593, 0, 1, 0, -0.992593, 0, 0.121488, 6.63845, 0, 23.3998)
+[node name="Bricks" type="StaticBody3D" parent="."]
 
-[node name="Model" type="MeshInstance3D" parent="Wall2"]
-mesh = SubResource("BoxMesh_52au3")
+[node name="Brick" parent="Bricks" instance=ExtResource("4_tee3d")]
+transform = Transform3D(2.5, 0, 0, 0, 2.5, 0, 0, 0, 2.5, -0.0447972, 1.09201, 11.0939)
 
-[node name="Hitbox" type="CollisionShape3D" parent="Wall2"]
-shape = SubResource("BoxShape3D_jtqhj")
+[node name="Brick2" parent="Bricks" instance=ExtResource("4_tee3d")]
+transform = Transform3D(2.5, 0, 0, 0, 2.5, 0, 0, 0, 2.5, -1.26542, 1.09201, 11.7296)
 
-[node name="Wall3" type="StaticBody3D" parent="."]
-transform = Transform3D(0.1249, 0, 0.992169, 0, 1, 0, -0.992169, 0, 0.1249, -9.78475, 0, 23.3998)
+[node name="Brick3" parent="Bricks" instance=ExtResource("4_tee3d")]
+transform = Transform3D(2.5, 0, 0, 0, 2.5, 0, 0, 0, 2.5, -2.46007, 1.09201, 11.8536)
 
-[node name="Hitbox" type="CollisionShape3D" parent="Wall3"]
-shape = SubResource("BoxShape3D_jtqhj")
+[node name="Brick4" parent="Bricks" instance=ExtResource("4_tee3d")]
+transform = Transform3D(2.5, 0, 0, 0, 2.5, 0, 0, 0, 2.5, -3.77614, 1.09201, 11.4562)
 
-[node name="Model" type="MeshInstance3D" parent="Wall3"]
-transform = Transform3D(1, 0, -3.55271e-15, 0, 1, 0, 3.55271e-15, 0, 1, 0, 0, 0)
-mesh = SubResource("BoxMesh_52au3")
+[node name="Brick5" parent="Bricks" instance=ExtResource("4_tee3d")]
+transform = Transform3D(2.5, 0, 0, 0, 2.5, 0, 0, 0, 2.5, -5.07816, 1.09201, 10.7764)
 
-[connection signal="body_entered" from="Ball" to="Ball" method="_on_body_entered"]
+[node name="Brick6" parent="Bricks" instance=ExtResource("4_tee3d")]
+transform = Transform3D(2.5, 0, 0, 0, 2.5, 0, 0, 0, 2.5, 1.06516, 1.09201, 10.9425)
+
+[node name="Brick7" parent="Bricks" instance=ExtResource("4_tee3d")]
+transform = Transform3D(2.5, 0, 0, 0, 2.5, 0, 0, 0, 2.5, 2.22946, 1.09201, 11.2525)
+
+[node name="Brick8" parent="Bricks" instance=ExtResource("4_tee3d")]
+transform = Transform3D(2.5, 0, 0, 0, 2.5, 0, 0, 0, 2.5, 3.70331, 1.09201, 11.6219)
+
+[node name="Brick9" parent="Bricks" instance=ExtResource("4_tee3d")]
+transform = Transform3D(2.5, 0, 0, 0, 2.5, 0, 0, 0, 2.5, 3.03751, 2.40505, 11.2525)
+
+[node name="Brick10" parent="Bricks" instance=ExtResource("4_tee3d")]
+transform = Transform3D(2.5, 0, 0, 0, 2.5, 0, 0, 0, 2.5, 1.68482, 2.40505, 11.2525)
+
+[node name="Brick11" parent="Bricks" instance=ExtResource("4_tee3d")]
+transform = Transform3D(2.5, 0, 0, 0, 2.5, 0, 0, 0, 2.5, 0.360328, 2.40505, 11.2525)
+
+[node name="Brick12" parent="Bricks" instance=ExtResource("4_tee3d")]
+transform = Transform3D(2.5, 0, 0, 0, 2.5, 0, 0, 0, 2.5, -0.92508, 2.40505, 11.2525)
+
+[node name="Brick13" parent="Bricks" instance=ExtResource("4_tee3d")]
+transform = Transform3D(2.5, 0, 0, 0, 2.5, 0, 0, 0, 2.5, -2.25799, 2.40505, 11.2525)
+
+[node name="Brick14" parent="Bricks" instance=ExtResource("4_tee3d")]
+transform = Transform3D(2.5, 0, 0, 0, 2.5, 0, 0, 0, 2.5, -3.95473, 2.40505, 11.2525)
+
+[node name="Brick15" parent="Bricks" instance=ExtResource("4_tee3d")]
+transform = Transform3D(2.5, 0, 0, 0, 2.5, 0, 0, 0, 2.5, -3.54992, 3.56114, 11.2525)
+
+[node name="Brick16" parent="Bricks" instance=ExtResource("4_tee3d")]
+transform = Transform3D(2.5, 0, 0, 0, 2.5, 0, 0, 0, 2.5, -2.01223, 3.56114, 11.2525)
+
+[node name="Brick17" parent="Bricks" instance=ExtResource("4_tee3d")]
+transform = Transform3D(2.5, 0, 0, 0, 2.5, 0, 0, 0, 2.5, -0.584077, 3.56114, 11.2525)
+
+[node name="Brick18" parent="Bricks" instance=ExtResource("4_tee3d")]
+transform = Transform3D(2.5, 0, 0, 0, 2.5, 0, 0, 0, 2.5, -0.389528, 3.50166, 11.2525)
+
+[node name="Brick19" parent="Bricks" instance=ExtResource("4_tee3d")]
+transform = Transform3D(2.5, 0, 0, 0, 2.5, 0, 0, 0, 2.5, 2.39347, 3.56114, 11.2525)
+
+[node name="Wall1" parent="." instance=ExtResource("3_34q70")]
+transform = Transform3D(30, 0, 0, 0, 6, 0, 0, 0, 1, 0, 0, 15)
+
+[node name="Wall2" parent="." instance=ExtResource("3_34q70")]
+transform = Transform3D(-1.31134e-06, 0, -1, 0, 6, 0, 30, 0, -4.37114e-08, -15, 0, 0)
+
+[node name="Wall3" parent="." instance=ExtResource("3_34q70")]
+transform = Transform3D(-1.31134e-06, 0, 1, 0, 6, 0, -30, 0, -4.37114e-08, 15, 0, 0)
+
+[node name="Eraser1" parent="." instance=ExtResource("6_pbsx2")]
+transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 0, 0, -3)
+
+[node name="Prepare-thyself" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("5_ilkq2")
+autoplay = true
+
+[connection signal="timeout" from="BallSpawner/Cooldown" to="BallSpawner" method="_on_cooldown_timeout"]
