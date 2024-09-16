@@ -1,0 +1,18 @@
+[gd_scene load_steps=4 format=3 uid="uid://rxlsg2agbmrs"]
+
+[sub_resource type="WorldBoundaryShape3D" id="WorldBoundaryShape3D_oo5gt"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_b1mah"]
+albedo_color = Color(1, 0.752941, 0.752941, 1)
+
+[sub_resource type="PlaneMesh" id="PlaneMesh_c058s"]
+material = SubResource("StandardMaterial3D_b1mah")
+size = Vector2(30, 30)
+
+[node name="Ground" type="StaticBody3D"]
+
+[node name="Hitbox" type="CollisionShape3D" parent="."]
+shape = SubResource("WorldBoundaryShape3D_oo5gt")
+
+[node name="Model" type="MeshInstance3D" parent="."]
+mesh = SubResource("PlaneMesh_c058s")

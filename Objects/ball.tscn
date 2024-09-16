@@ -16,7 +16,7 @@ radial_segments = 8
 rings = 8
 
 [node name="Ball" type="RigidBody3D"]
-transform = Transform3D(0.978148, 0, 0.207912, 0, 1, 0, -0.207912, 0, 0.978148, 0, 0, 5)
+transform = Transform3D(0.978148, 0, 0.207912, 0, 1, 0, -0.207912, 0, 0.978148, 0, 0, 0)
 axis_lock_linear_y = true
 axis_lock_angular_x = true
 axis_lock_angular_y = true
@@ -40,3 +40,11 @@ stream = ExtResource("3_wujke")
 
 [node name="You-cant-escape2hxFfar" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("4_rggd7")
+
+[connection signal="ball_hit" from="." to="." method="_on_ball_hit"]
+[connection signal="brick_hit" from="." to="." method="_on_brick_hit"]
+[connection signal="dead" from="." to="." method="_on_dead"]
+[connection signal="hit" from="." to="." method="_on_hit"]
+[connection signal="out_of_map_bounds" from="." to="." method="_on_out_of_map_bounds"]
+[connection signal="paddle_hit" from="." to="." method="_on_paddle_hit"]
+[connection signal="wall_hit" from="." to="." method="_on_wall_hit"]

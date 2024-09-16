@@ -1,0 +1,41 @@
+[gd_scene load_steps=2 format=3 uid="uid://cpf7a88huhm7h"]
+
+[ext_resource type="PackedScene" uid="uid://cvuwjmml806v" path="res://Objects/brick_cube.tscn" id="1_w0uct"]
+
+[node name="Bricks" type="StaticBody3D"]
+
+[node name="Brick" parent="." instance=ExtResource("1_w0uct")]
+transform = Transform3D(2.5, 0, 0, 0, 2.5, 0, 0, 0, 2.5, -0.0447972, 1.09201, 0)
+
+[node name="Brick2" parent="." instance=ExtResource("1_w0uct")]
+transform = Transform3D(2.5, 0, 0, 0, 2.5, 0, 0, 0, 2.5, -1.26542, 1.09201, 0)
+
+[node name="Brick3" parent="." instance=ExtResource("1_w0uct")]
+transform = Transform3D(2.5, 0, 0, 0, 2.5, 0, 0, 0, 2.5, -2.46007, 1.09201, 0)
+
+[node name="Brick4" parent="." instance=ExtResource("1_w0uct")]
+transform = Transform3D(2.5, 0, 0, 0, 2.5, 0, 0, 0, 2.5, -3.77614, 1.09201, 0)
+
+[node name="Brick5" parent="." instance=ExtResource("1_w0uct")]
+transform = Transform3D(2.5, 0, 0, 0, 2.5, 0, 0, 0, 2.5, -5.07816, 1.09201, 0)
+
+[node name="Brick6" parent="." instance=ExtResource("1_w0uct")]
+transform = Transform3D(2.5, 0, 0, 0, 2.5, 0, 0, 0, 2.5, 1.06516, 1.09201, 0)
+
+[node name="Brick14" parent="." instance=ExtResource("1_w0uct")]
+transform = Transform3D(2.5, 0, 0, 0, 2.5, 0, 0, 0, 2.5, -3.95473, 2.40505, 0)
+
+[node name="Brick15" parent="." instance=ExtResource("1_w0uct")]
+transform = Transform3D(2.5, 0, 0, 0, 2.5, 0, 0, 0, 2.5, -3.54992, 3.56114, 0)
+
+[node name="Brick16" parent="." instance=ExtResource("1_w0uct")]
+transform = Transform3D(2.5, 0, 0, 0, 2.5, 0, 0, 0, 2.5, -2.01223, 3.56114, 0)
+
+[node name="Brick17" parent="." instance=ExtResource("1_w0uct")]
+transform = Transform3D(2.5, 0, 0, 0, 2.5, 0, 0, 0, 2.5, -0.584077, 3.56114, 0)
+
+[node name="Brick18" parent="." instance=ExtResource("1_w0uct")]
+transform = Transform3D(2.5, 0, 0, 0, 2.5, 0, 0, 0, 2.5, -0.389528, 3.50166, 0)
+
+[node name="Brick19" parent="." instance=ExtResource("1_w0uct")]
+transform = Transform3D(2.5, 0, 0, 0, 2.5, 0, 0, 0, 2.5, 2.39347, 3.56114, 0)

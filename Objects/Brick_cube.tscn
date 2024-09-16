@@ -1,6 +1,9 @@
-[gd_scene load_steps=4 format=3 uid="uid://cvuwjmml806v"]
+[gd_scene load_steps=5 format=3 uid="uid://cvuwjmml806v"]
 
 [ext_resource type="PackedScene" uid="uid://divjpd75uryeo" path="res://Objects/brick_base.tscn" id="1_4tj6s"]
+
+[sub_resource type="PhysicsMaterial" id="PhysicsMaterial_7l1q3"]
+friction = 0.3
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_vlvn2"]
 size = Vector3(2.5, 2.5, 2.5)
@@ -10,6 +13,7 @@ size = Vector3(2.5, 2.5, 2.5)
 
 [node name="Brick" instance=ExtResource("1_4tj6s")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 0)
+physics_material_override = SubResource("PhysicsMaterial_7l1q3")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="." index="0"]
 shape = SubResource("BoxShape3D_vlvn2")
