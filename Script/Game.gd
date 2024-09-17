@@ -7,12 +7,12 @@ var CONTROLS_PRESSED = {
 
 var BallFather = preload("res://Objects/ball.tscn")
 
-# Would be easier to scan the Levels directory for names
+# TODO Should scan the Levels directory for names instead
 var LevelCodes = [
 	'1',
 	'2',
 ]
-	
+
 func Round(Number:float, Digit:int = 0):
 	# Godot doesnt provide a func to round to a specific digit after the floating point
 	return round(Number * pow(10.0, Digit)) / pow(10.0, Digit)
@@ -58,8 +58,9 @@ func IsLevelCleared():
 	if !Level:
 		return true
 	
-	if Level.get_children().size() > 0:
-		return false
+	for LevelElement in Level.get_children():
+		if LevelElement is Brick and LevelElement.is_dead == false:
+			return false
 	
 	return true
 

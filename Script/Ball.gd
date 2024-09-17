@@ -66,7 +66,6 @@ func _on_hit(collision: KinematicCollision3D, delta:float) -> void:
 func _on_brick_hit(collision: KinematicCollision3D, delta:float, collider: Brick) -> void:
 	collider.destroy()
 	Game.SillyFreeze()
-	$SoundDestroy.play()
 	Game.SpawnBall()
 
 func _on_wall_hit(collision: KinematicCollision3D, delta:float, collider: Wall) -> void:

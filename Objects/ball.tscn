@@ -1,9 +1,8 @@
-[gd_scene load_steps=9 format=3 uid="uid://cl12k28cwwvko"]
+[gd_scene load_steps=8 format=3 uid="uid://cl12k28cwwvko"]
 
 [ext_resource type="Script" path="res://Script/Ball.gd" id="1_eet82"]
 [ext_resource type="AudioStream" uid="uid://cmmuaalksgik3" path="res://Sounds/parry-ultrakill.mp3" id="2_1bpmh"]
 [ext_resource type="Material" uid="uid://d373wl86atv82" path="res://Materials/ball.tres" id="2_6u8m8"]
-[ext_resource type="AudioStream" uid="uid://ud08iqp8n08t" path="res://Sounds/destroy_8pkWYMG.mp3" id="3_wujke"]
 [ext_resource type="AudioStream" uid="uid://b7whnxlullose" path="res://Sounds/comedy_pop_finger_in_mouth_001.mp3" id="4_ccy0c"]
 [ext_resource type="AudioStream" uid="uid://5vqmikpcde1x" path="res://Sounds/you-cant-escape_2HXFfar.mp3" id="4_rggd7"]
 
@@ -34,9 +33,6 @@ mesh = SubResource("SphereMesh_a4t47")
 [node name="SoundHit" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("2_1bpmh")
 
-[node name="SoundDestroy" type="AudioStreamPlayer" parent="."]
-stream = ExtResource("3_wujke")
-
 [node name="SoundHitWall" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("4_rggd7")
 
@@ -45,6 +41,7 @@ stream = ExtResource("4_ccy0c")
 
 [node name="Afterlife" type="Timer" parent="."]
 wait_time = 7.0
+one_shot = true
 
 [connection signal="ball_hit" from="." to="." method="_on_ball_hit"]
 [connection signal="brick_hit" from="." to="." method="_on_brick_hit"]

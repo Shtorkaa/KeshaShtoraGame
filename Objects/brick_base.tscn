@@ -4,3 +4,9 @@
 
 [node name="Brick" type="RigidBody3D"]
 script = ExtResource("1_4geke")
+
+[node name="Afterlife" type="Timer" parent="."]
+wait_time = 7.0
+one_shot = true
+
+[connection signal="timeout" from="Afterlife" to="." method="_on_afterlife_timeout"]

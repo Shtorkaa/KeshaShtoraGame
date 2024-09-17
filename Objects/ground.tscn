@@ -1,4 +1,6 @@
-[gd_scene load_steps=4 format=3 uid="uid://rxlsg2agbmrs"]
+[gd_scene load_steps=5 format=3 uid="uid://rxlsg2agbmrs"]
+
+[sub_resource type="PhysicsMaterial" id="PhysicsMaterial_ulyvc"]
 
 [sub_resource type="WorldBoundaryShape3D" id="WorldBoundaryShape3D_oo5gt"]
 
@@ -10,6 +12,7 @@ material = SubResource("StandardMaterial3D_b1mah")
 size = Vector2(30, 30)
 
 [node name="Ground" type="StaticBody3D"]
+physics_material_override = SubResource("PhysicsMaterial_ulyvc")
 
 [node name="Hitbox" type="CollisionShape3D" parent="."]
 shape = SubResource("WorldBoundaryShape3D_oo5gt")

@@ -17,9 +17,10 @@ func _physics_process(DeltaTime: float):
 	
 	move_and_collide(Direction * Speed * DeltaTime)
 	
-	# Use this instead if you wanna balance the rotation when not moving
+	# Use this if you wanna balance the rotation when not moving
 	var RotationDir = Direction.x if Direction.x != 0 else ((1 if Rotation < 0 else -1) if Rotation != 0 else 0)
-	#var RotationDir = Direction.x if Direction.x != 0 else 0
+	# Instead this
+	# var RotationDir = Direction.x if Direction.x != 0 else 0
 	
 	Rotation = clamp(Rotation + RotationSpeed * RotationDir, RotationMin, RotationMax)
 	rotation = Vector3(0, Game.Round(Rotation, 1), 0)
