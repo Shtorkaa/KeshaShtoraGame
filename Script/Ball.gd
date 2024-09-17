@@ -1,9 +1,13 @@
 extends RigidBody3D
 class_name Ball
 
-var dir = Vector3(randf_range(0, .4), randf_range(0, .4), randf_range(0, .4)) # -get_global_transform().basis.z
+var dir = Vector3.FORWARD
 var speed = 9.0
-var respawn_when_out_of_map_bounds = false
+var is_dead = false
+var remove_on_death = [
+	"Hitbox",
+	"Model",
+]
 
 signal out_of_map_bounds
 signal dead
@@ -14,9 +18,12 @@ signal  brick_hit (collision: KinematicCollision3D, delta:float, collider:Brick)
 signal   ball_hit (collision: KinematicCollision3D, delta:float, collider:Ball)
 
 func move_forward(DeltaTime:float) -> KinematicCollision3D:
+	if is_dead: return
 	return move_and_collide(dir * speed * DeltaTime)
 
 func _physics_process(delta:float):
+	if is_dead: return
+	
 	var collision = move_forward(delta)
 	
 	if collision:
@@ -34,17 +41,24 @@ func _physics_process(delta:float):
 			ball_hit.emit(collision, delta, collider)
 
 func _on_out_of_map_bounds() -> void:
-	if respawn_when_out_of_map_bounds or Game.CountBalls() == 1:
+	if Game.CountBalls() == 1:
 		Game.SpawnBall()
 	
 	dead.emit()
 
 func _on_dead() -> void:
-	queue_free()
+	if is_dead: return
+	is_dead = true
+	for kid_full_name in remove_on_death:
+		var kid = get_node(kid_full_name)
+		if !kid: return
+		kid.queue_free()
+	$SoundDead.play()
+	$Afterlife.start()
 
 func _on_hit(collision: KinematicCollision3D, delta:float) -> void:
 	Game.SillyFreeze(0.05)
-	$"Parry-ultrakill".play()
+	$SoundHit.play()
 	dir = dir.bounce(collision.get_normal())
 	# Tencnically speeds it up but otherwise its clanky
 	move_forward(delta * 2)
@@ -52,11 +66,11 @@ func _on_hit(collision: KinematicCollision3D, delta:float) -> void:
 func _on_brick_hit(collision: KinematicCollision3D, delta:float, collider: Brick) -> void:
 	collider.destroy()
 	Game.SillyFreeze()
-	$Destroy8PkWymg.play()
+	$SoundDestroy.play()
 	Game.SpawnBall()
 
 func _on_wall_hit(collision: KinematicCollision3D, delta:float, collider: Wall) -> void:
-	$"You-cant-escape2hxFfar".play()
+	$SoundHitWall.play()
 	print([
 		'Yui tells you that there is no escape,',
 		'Yui tells you there is no where to go,',
@@ -80,6 +94,8 @@ func _on_paddle_hit(collision: KinematicCollision3D, delta:float, collider: Padd
 		'pong',
 	].pick_random())
 
-
 func _on_ball_hit(collision: KinematicCollision3D, delta: float, collider: Ball) -> void:
-	pass
+	collider.out_of_map_bounds.emit()
+
+func _on_afterlife_timeout() -> void:
+	queue_free()

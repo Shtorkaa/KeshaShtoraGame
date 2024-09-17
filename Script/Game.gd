@@ -13,7 +13,6 @@ var LevelCodes = [
 	'2',
 ]
 
-
 # Helpers
 
 func Round(Number:float, Digit:int = 0):
@@ -79,7 +78,7 @@ func CountBalls() -> int:
 	# A better way would be to store all the balls by one path
 	var Count = 0
 	for GameElement in get_children():
-		if GameElement is Ball:
+		if GameElement is Ball and GameElement.is_dead == false: # Only counts alive balls
 			Count += 1
 	return Count
 
