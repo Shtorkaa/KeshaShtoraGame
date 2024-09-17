@@ -3,6 +3,7 @@ class_name Brick
 
 func destroy():
 	#apply_force(Vector3.UP * 1000)
+	Game.LevelFinishCheck()
 	queue_free()
 
 func _physics_process(delta: float) -> void:

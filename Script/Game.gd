@@ -12,24 +12,12 @@ var LevelCodes = [
 	'1',
 	'2',
 ]
-
-# Helpers
-
+	
 func Round(Number:float, Digit:int = 0):
 	# Godot doesnt provide a func to round to a specific digit after the floating point
 	return round(Number * pow(10.0, Digit)) / pow(10.0, Digit)
 
-# Silly helpers
-
-func Error(Message:String):
-	# printerr('ERROR: ' + Message)
-	push_error(Message)
-	return false
-
-# Base game
-
 func SillyFreeze(TimeScale:float = 0.02):
-	return
 	Engine.time_scale = TimeScale
 	var SillyFreezeTimer = get_tree().create_timer(0.02)
 	await SillyFreezeTimer.timeout
@@ -50,11 +38,8 @@ func ClearLevel():
 		Child.queue_free()
 
 func LoadLevel(LevelCode:String = LevelCodes.pick_random()):
-	# Could also scan LevelCodes instead
-	var LevelPath = "res://Scenes/Levels/" + LevelCode + ".tscn"
-	var Level = load(LevelPath)
-	
-	if !Level: return Error('Couldnt find ' + LevelPath)
+	var Level = load("res://Scenes/Levels/" + LevelCode + ".tscn")
+	if !Level: return
 	
 	ClearLevel()
 	
@@ -69,10 +54,18 @@ func LoadLevel(LevelCode:String = LevelCodes.pick_random()):
 
 func IsLevelCleared():
 	var Level = get_node('Level')
-	if !Level: return !Error('Couldnt find level child node, perhaps it was not created or was saved under a wrong name.')
 	
-	if Level.get_children().size() > 0: return false
-	else: return true
+	if !Level:
+		return true
+	
+	if Level.get_children().size() > 0:
+		return false
+	
+	return true
+
+func LevelFinishCheck():
+	if IsLevelCleared():
+		LoadLevel()
 
 func CountBalls() -> int:
 	# A better way would be to store all the balls by one path
@@ -92,8 +85,3 @@ func _input(Event:InputEvent):
 			CONTROLS_PRESSED[CONTROLS_NAME] = true
 		elif Input.is_action_just_released(CONTROLS_NAME):
 			CONTROLS_PRESSED[CONTROLS_NAME] = false
-
-func _process(DeltaTime:float) -> void:
-	
-	if IsLevelCleared():
-		LoadLevel()

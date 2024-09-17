@@ -3,7 +3,7 @@
 [ext_resource type="PackedScene" uid="uid://divjpd75uryeo" path="res://Objects/brick_base.tscn" id="1_4tj6s"]
 
 [sub_resource type="PhysicsMaterial" id="PhysicsMaterial_7l1q3"]
-friction = 0.3
+friction = 0.15
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_vlvn2"]
 size = Vector3(2.5, 2.5, 2.5)
