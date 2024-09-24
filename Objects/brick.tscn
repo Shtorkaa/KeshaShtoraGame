@@ -1,6 +1,7 @@
-[gd_scene load_steps=2 format=3 uid="uid://divjpd75uryeo"]
+[gd_scene load_steps=3 format=3 uid="uid://divjpd75uryeo"]
 
 [ext_resource type="Script" path="res://Script/Brick.gd" id="1_4geke"]
+[ext_resource type="AudioStream" uid="uid://ud08iqp8n08t" path="res://Sounds/destroy_8pkWYMG.mp3" id="2_ocrd2"]
 
 [node name="Brick" type="RigidBody3D"]
 script = ExtResource("1_4geke")
@@ -8,5 +9,8 @@ script = ExtResource("1_4geke")
 [node name="Afterlife" type="Timer" parent="."]
 wait_time = 7.0
 one_shot = true
+
+[node name="SoundDestroy" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("2_ocrd2")
 
 [connection signal="timeout" from="Afterlife" to="." method="_on_afterlife_timeout"]

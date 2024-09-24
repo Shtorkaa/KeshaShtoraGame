@@ -1,0 +1,4 @@
+- Turn the ball into a static body instead of rigid, since we're not using the rigidy body functionality ?
+- Turn wall and eraser hitboxes into world border type ones
+- Replace wall root node with basic 3d node instead of static body since it requires a collider present
+- Finish the same thing i did with pickup signals system on bricks to create brick variations

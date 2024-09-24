@@ -2,7 +2,7 @@ extends RigidBody3D
 class_name Ball
 
 var dir = Vector3.FORWARD
-var speed = 9.0
+var speed = 12.0
 var is_dead = false
 var remove_on_death = [
 	"Hitbox",
@@ -24,21 +24,22 @@ func move_forward(DeltaTime:float) -> KinematicCollision3D:
 func _physics_process(delta:float):
 	if is_dead: return
 	
+	# NOTE If theres a signal that gives out a KinematicCollision3D use it instead of all this
+	# NOTE I have no clue what was i talking about in the comment above
 	var collision = move_forward(delta)
+	if !collision: return
 	
-	if collision:
-		hit.emit(collision, delta)
-		
-		var collider = collision.get_collider()
-		
-		if   collider is Brick:
-			brick_hit.emit(collision, delta, collider)
-		elif collider is Wall:
-			wall_hit.emit(collision, delta, collider)
-		elif collider is Paddle:
-			paddle_hit.emit(collision, delta, collider)
-		elif collider is Ball:
-			ball_hit.emit(collision, delta, collider)
+	hit.emit(collision, delta)
+	var collider = collision.get_collider()
+	
+	if   collider is Brick:
+		brick_hit.emit(collision, delta, collider)
+	elif collider is Wall:
+		wall_hit.emit(collision, delta, collider)
+	elif collider is Paddle:
+		paddle_hit.emit(collision, delta, collider)
+	elif collider is Ball:
+		ball_hit.emit(collision, delta, collider)
 
 func _on_out_of_map_bounds() -> void:
 	if Game.CountBalls() == 1:

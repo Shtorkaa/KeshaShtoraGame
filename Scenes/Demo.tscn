@@ -18,15 +18,15 @@ script = ExtResource("1_qw11p")
 environment = SubResource("Environment_mhmr0")
 
 [node name="Sun" type="DirectionalLight3D" parent="."]
-transform = Transform3D(-0.987577, 0.145189, 0.0600925, 0.125499, 0.498667, 0.85766, 0.0945559, 0.854548, -0.510694, 0, 0, 0)
-
-[node name="Camera" type="Camera3D" parent="."]
-transform = Transform3D(-1, -3.68602e-15, -8.74228e-08, -1.39276e-08, 0.987228, 0.159313, 8.63062e-08, 0.159313, -0.987228, 0, 3.84506, -18.3112)
+transform = Transform3D(0.532575, 0.108664, -0.839379, 0.846262, -0.0851569, 0.525918, -0.0143303, -0.990424, -0.137311, 0, 0, 0)
 
 [node name="Paddle" parent="." instance=ExtResource("1_0ufe6")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.25, -13.1241)
 
-[node name="Map" type="StaticBody3D" parent="."]
+[node name="Camera" type="Camera3D" parent="."]
+transform = Transform3D(-1, -1.99057e-14, -8.74228e-08, -1.39276e-08, 0.987228, 0.159313, 8.63062e-08, 0.159313, -0.987228, 0, 3.84506, -18.3112)
+
+[node name="Map" type="Node3D" parent="."]
 
 [node name="Ground" parent="Map" instance=ExtResource("3_unaqp")]
 

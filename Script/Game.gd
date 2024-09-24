@@ -7,15 +7,25 @@ var CONTROLS_PRESSED = {
 
 var BallFather = preload("res://Objects/ball.tscn")
 
-# TODO Should scan the Levels directory for names instead
+var Level
+
+# TODO Scan directories for names instead ?
 var LevelCodes = [
 	'1',
-	'2',
+]
+var ItemCodes = [
+	'cruncher'
 ]
 
-func Round(Number:float, Digit:int = 0):
+func Round(Number:float, Digit:int = 0) -> float:
 	# Godot doesnt provide a func to round to a specific digit after the floating point
 	return round(Number * pow(10.0, Digit)) / pow(10.0, Digit)
+
+func Random(Min:int = 0, Max:int = 100) -> int:
+	return randi() % (Max - Min + 1) + Min
+
+func Proc(Chance:float = 50) -> bool:
+	return Random() > 50
 
 func SillyFreeze(TimeScale:float = 0.02):
 	Engine.time_scale = TimeScale
@@ -33,28 +43,36 @@ func SpawnBall(Position:Vector3 = Vector3.ZERO, Direction:Vector3 = Vector3.FORW
 	
 	add_child(NewBall)
 
+func SpawnPickup(Position:Vector3 = Vector3.ZERO, PickupCode:String = ItemCodes.pick_random()):
+	var PickupScene = load("res://Objects/Pickups/pickup_" + PickupCode + ".tscn")
+	if !PickupScene: return
+	
+	var NewPickup = PickupScene.instantiate()
+	
+	NewPickup.position = Position
+	
+	add_child(NewPickup)
+
 func ClearLevel():
 	for Child in get_children():
 		Child.queue_free()
 
 func LoadLevel(LevelCode:String = LevelCodes.pick_random()):
-	var Level = load("res://Scenes/Levels/" + LevelCode + ".tscn")
-	if !Level: return
+	var LevelScene = load("res://Scenes/Levels/" + LevelCode + ".tscn")
+	if !LevelScene: return
 	
 	ClearLevel()
 	
-	var NewLevel = Level.instantiate()
+	Level = LevelScene.instantiate()
 	
-	NewLevel.name = 'Level'
-	NewLevel.position.z += 5.0
+	Level.name = 'Level'
+	Level.position.z += 5.0
 	
-	add_child(NewLevel)
+	add_child(Level)
 	
 	SpawnBall()
 
 func IsLevelCleared():
-	var Level = get_node('Level')
-	
 	if !Level:
 		return true
 	

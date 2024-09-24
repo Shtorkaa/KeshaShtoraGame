@@ -11,6 +11,7 @@ func destroy():
 	if is_dead: return
 	is_dead = true
 	Game.LevelFinishCheck()
+	if Game.Proc(): Game.SpawnPickup(position) # Silly addition, remove later
 	for kid_full_name in remove_on_death:
 		var kid = get_node(kid_full_name)
 		if !kid: return
