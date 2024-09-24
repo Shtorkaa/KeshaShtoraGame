@@ -5,6 +5,8 @@ var CONTROLS_PRESSED = {
 	'RIGHT': false,
 }
 
+var ItemsFixedHeightSpwnThing = .5
+
 var BallFather = preload("res://Objects/ball.tscn")
 
 var Level
@@ -37,7 +39,7 @@ func SpawnBall(Position:Vector3 = Vector3.ZERO, Direction:Vector3 = Vector3.FORW
 	var NewBall = BallFather.instantiate()
 	
 	NewBall.position = Position
-	NewBall.position.y = 0.5
+	NewBall.position.y = ItemsFixedHeightSpwnThing
 	NewBall.dir = Direction
 	NewBall.speed = Speed
 	
@@ -50,6 +52,7 @@ func SpawnPickup(Position:Vector3 = Vector3.ZERO, PickupCode:String = ItemCodes.
 	var NewPickup = PickupScene.instantiate()
 	
 	NewPickup.position = Position
+	NewPickup.position.y = ItemsFixedHeightSpwnThing
 	
 	add_child(NewPickup)
 

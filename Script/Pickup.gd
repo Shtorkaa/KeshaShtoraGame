@@ -9,7 +9,6 @@ var remove_on_death = [
 	'Hitbox',
 ]
 
-# Fuck Godot ?
 signal collected
 signal out_of_map_bounds
 signal dead
@@ -43,8 +42,3 @@ func _on_body_entered(body:Node3D) -> void:
 
 func _on_afterlife_timeout() -> void:
 	queue_free()
-
-# Im not sure it is a good idea to remove this
-func _on_out_of_map_bounds() -> void: pass
-func _on_collected() -> void: pass
-func _on_dead() -> void: pass
