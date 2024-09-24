@@ -21,12 +21,13 @@ environment = SubResource("Environment_mhmr0")
 transform = Transform3D(0.532575, 0.108664, -0.839379, 0.846262, -0.0851569, 0.525918, -0.0143303, -0.990424, -0.137311, 0, 0, 0)
 
 [node name="Paddle" parent="." instance=ExtResource("1_0ufe6")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.25, -13.1241)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.25, -6.59721)
 
 [node name="Camera" type="Camera3D" parent="."]
-transform = Transform3D(-1, -1.99057e-14, -8.74228e-08, -1.39276e-08, 0.987228, 0.159313, 8.63062e-08, 0.159313, -0.987228, 0, 3.84506, -18.3112)
+transform = Transform3D(-1, -1.81293e-14, -8.74228e-08, -1.39276e-08, 0.987228, 0.159313, 8.63062e-08, 0.159313, -0.987228, 0, 3.84506, -11.7843)
 
 [node name="Map" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 6.52689)
 
 [node name="Ground" parent="Map" instance=ExtResource("3_unaqp")]
 

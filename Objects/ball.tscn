@@ -13,15 +13,11 @@ material = ExtResource("2_6u8m8")
 radial_segments = 8
 rings = 8
 
-[node name="Ball" type="RigidBody3D"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0)
+[node name="Ball" type="StaticBody3D"]
 axis_lock_linear_y = true
 axis_lock_angular_x = true
 axis_lock_angular_y = true
 axis_lock_angular_z = true
-gravity_scale = 0.0
-contact_monitor = true
-max_contacts_reported = 10
 script = ExtResource("1_eet82")
 
 [node name="Hitbox" type="CollisionShape3D" parent="."]

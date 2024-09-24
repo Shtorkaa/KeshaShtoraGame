@@ -1,4 +1,4 @@
-extends RigidBody3D
+extends StaticBody3D
 class_name Ball
 
 var dir = Vector3.FORWARD
@@ -17,20 +17,17 @@ signal paddle_hit (collision: KinematicCollision3D, delta:float, collider:Paddle
 signal  brick_hit (collision: KinematicCollision3D, delta:float, collider:Brick)
 signal   ball_hit (collision: KinematicCollision3D, delta:float, collider:Ball)
 
-func move_forward(DeltaTime:float) -> KinematicCollision3D:
-	if is_dead: return
-	return move_and_collide(dir * speed * DeltaTime)
-
 func _physics_process(delta:float):
 	if is_dead: return
 	
 	# NOTE If theres a signal that gives out a KinematicCollision3D use it instead of all this
 	# NOTE I have no clue what was i talking about in the comment above
-	var collision = move_forward(delta)
+	var collision = move_and_collide(dir * speed * delta)
 	if !collision: return
 	
-	hit.emit(collision, delta)
 	var collider = collision.get_collider()
+	
+	hit.emit(collision, delta)
 	
 	if   collider is Brick:
 		brick_hit.emit(collision, delta, collider)
@@ -58,11 +55,14 @@ func _on_dead() -> void:
 	$Afterlife.start()
 
 func _on_hit(collision: KinematicCollision3D, delta:float) -> void:
+	if collision.get_collider() is Brick and collision.get_collider().is_dead: return 
 	Game.SillyFreeze(0.05)
 	$SoundHit.play()
 	dir = dir.bounce(collision.get_normal())
 	# Tencnically speeds it up but otherwise its clanky
-	move_forward(delta * 2)
+	print(collision.get_collider())
+	if collision.get_collider() is Brick:
+		print(collision.get_collider().is_dead)
 
 func _on_brick_hit(collision: KinematicCollision3D, delta:float, collider: Brick) -> void:
 	collider.destroy()

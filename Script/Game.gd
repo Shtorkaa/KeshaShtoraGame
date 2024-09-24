@@ -69,7 +69,7 @@ func LoadLevel(LevelCode:String = LevelCodes.pick_random()):
 	Level = LevelScene.instantiate()
 	
 	Level.name = 'Level'
-	Level.position.z += 5.0
+	Level.position.z += 12.0
 	
 	add_child(Level)
 	
