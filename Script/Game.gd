@@ -7,7 +7,7 @@ var CONTROLS_PRESSED = {
 	'LEFT': false,
 	'RIGHT': false,
 }
-var Level = LoadLevel()
+@onready var Level = LoadLevel()
 
 # TODO Scan directories for names instead if its possible
 var LevelCodes = [
@@ -80,6 +80,8 @@ func LoadLevel(LevelCode:String = LevelCodes.pick_random()):
 	add_child(Level)
 	
 	SpawnBall()
+	
+	return Level
 
 func IsLevelCleared():
 	if !Level:

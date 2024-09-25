@@ -8,6 +8,7 @@
 
 [sub_resource type="Environment" id="Environment_mhmr0"]
 background_mode = 1
+background_color = Color(1, 0.717022, 0.320163, 1)
 
 [node name="Stage" type="Node3D"]
 
