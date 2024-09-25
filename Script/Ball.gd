@@ -59,10 +59,6 @@ func _on_hit(collision: KinematicCollision3D, delta:float) -> void:
 	Game.SillyFreeze(0.05)
 	$SoundHit.play()
 	dir = dir.bounce(collision.get_normal())
-	# Tencnically speeds it up but otherwise its clanky
-	print(collision.get_collider())
-	if collision.get_collider() is Brick:
-		print(collision.get_collider().is_dead)
 
 func _on_brick_hit(collision: KinematicCollision3D, delta:float, collider: Brick) -> void:
 	collider.destroy()
@@ -89,10 +85,7 @@ func _on_wall_hit(collision: KinematicCollision3D, delta:float, collider: Wall) 
 	].pick_random())
 
 func _on_paddle_hit(collision: KinematicCollision3D, delta:float, collider: Paddle) -> void:
-	print([
-		'ping',
-		'pong',
-	].pick_random())
+	print(['Ping', 'Pong'].pick_random())
 
 func _on_ball_hit(collision: KinematicCollision3D, delta: float, collider: Ball) -> void:
 	collider.out_of_map_bounds.emit()

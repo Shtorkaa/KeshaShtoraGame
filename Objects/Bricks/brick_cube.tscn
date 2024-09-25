@@ -8,7 +8,7 @@ size = Vector3(3, 3, 3)
 [sub_resource type="BoxMesh" id="BoxMesh_wya3k"]
 size = Vector3(3, 3, 3)
 
-[node name="Brick" instance=ExtResource("1_sdxye")]
+[node name="Brick_1" instance=ExtResource("1_sdxye")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.5, 0)
 
 [node name="Hitbox" type="CollisionShape3D" parent="." index="0"]

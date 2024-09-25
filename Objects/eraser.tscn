@@ -12,7 +12,7 @@ albedo_texture = ExtResource("2_atu2v")
 
 [sub_resource type="QuadMesh" id="QuadMesh_plscr"]
 
-[node name="Eraser" type="Area3D"]
+[node name="Eraser_1" type="Area3D"]
 collision_layer = 0
 monitorable = false
 script = ExtResource("1_orwad")

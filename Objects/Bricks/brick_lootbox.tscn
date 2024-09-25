@@ -1,0 +1,26 @@
+[gd_scene load_steps=6 format=3 uid="uid://dpj0wl1du3qi2"]
+
+[ext_resource type="PackedScene" uid="uid://divjpd75uryeo" path="res://Objects/brick.tscn" id="1_uh3rp"]
+[ext_resource type="Script" path="res://Script/Bricks/Brick_lootbox.gd" id="2_tc0fx"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_vg70o"]
+size = Vector3(3, 3, 3)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_fvua4"]
+albedo_color = Color(1, 0.705882, 0.4, 1)
+
+[sub_resource type="BoxMesh" id="BoxMesh_bn124"]
+material = SubResource("StandardMaterial3D_fvua4")
+size = Vector3(3, 3, 3)
+
+[node name="Brick_1" instance=ExtResource("1_uh3rp")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.5, 0)
+script = ExtResource("2_tc0fx")
+
+[node name="Hitbox" type="CollisionShape3D" parent="." index="0"]
+shape = SubResource("BoxShape3D_vg70o")
+
+[node name="Model" type="MeshInstance3D" parent="." index="1"]
+mesh = SubResource("BoxMesh_bn124")
+
+[connection signal="died" from="." to="." method="_on_died"]

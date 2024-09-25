@@ -3,7 +3,7 @@
 [ext_resource type="Script" path="res://Script/Brick.gd" id="1_4geke"]
 [ext_resource type="AudioStream" uid="uid://ud08iqp8n08t" path="res://Sounds/destroy_8pkWYMG.mp3" id="2_ocrd2"]
 
-[node name="Brick" type="RigidBody3D"]
+[node name="Brick_1" type="RigidBody3D"]
 script = ExtResource("1_4geke")
 
 [node name="Afterlife" type="Timer" parent="."]

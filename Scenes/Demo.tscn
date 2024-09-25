@@ -16,7 +16,7 @@ background_color = Color(1, 0.717022, 0.320163, 1)
 environment = SubResource("Environment_mhmr0")
 
 [node name="Sun" type="DirectionalLight3D" parent="."]
-transform = Transform3D(0.208833, 0.977838, -0.0148532, 0.400559, -0.0716708, 0.913464, 0.892155, -0.196711, -0.406649, 0, 0, 0)
+transform = Transform3D(0.694953, 0.673489, -0.251899, 0.400559, -0.0716707, 0.913464, 0.597154, -0.735714, -0.31958, 0, 0, 0)
 
 [node name="Paddle" parent="." instance=ExtResource("1_0ufe6")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.25, -6.59721)
@@ -38,7 +38,7 @@ transform = Transform3D(-1.31134e-06, 0, -1, 0, 6, 0, 30, 0, -4.37114e-08, -15, 
 [node name="Wall3" parent="Map" instance=ExtResource("3_34q70")]
 transform = Transform3D(-1.31134e-06, 0, 1, 0, 6, 0, -30, 0, -4.37114e-08, 15, 0, 0)
 
-[node name="Eraser1" parent="Map" instance=ExtResource("6_pbsx2")]
+[node name="Eraser" parent="Map" instance=ExtResource("6_pbsx2")]
 transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 0.0378561, -0.0331039, -14.9938)
 
 [node name="Prepare-thyself" type="AudioStreamPlayer" parent="."]

@@ -1,7 +1,7 @@
 extends Area3D
 class_name Pickup
 
-var speed = 8.0
+var speed = 5.0
 var dir = Vector3(0, 0, -1)
 var is_dead = false
 var delete_on_death = [
@@ -19,11 +19,6 @@ func die():
 	is_dead = true
 	
 	for node_path in delete_on_death: get_node(node_path).queue_free()
-	# Brick this back instead of above IF delete_on_death containes non required nodes
-	# for node_path in delete_on_death:
-		# var node = get_node(node_path)
-		# if !node: return
-		# node.queue_free()
 	
 	$Afterlife.start()
 	

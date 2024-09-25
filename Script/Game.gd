@@ -11,7 +11,7 @@ var CONTROLS_PRESSED = {
 
 # TODO Scan directories for names instead if its possible
 var LevelCodes = [
-	'1',
+	'1', '2',
 ]
 var ItemCodes = [
 	'cruncher',
@@ -67,7 +67,7 @@ func ClearLevel():
 		Child.queue_free()
 
 func LoadLevel(LevelCode:String = LevelCodes.pick_random()):
-	var LevelScene = load("res://Scenes/Levels/" + LevelCode + ".tscn")
+	var LevelScene = load("res://Scenes/Levels/Level_" + LevelCode + ".tscn")
 	if !LevelScene: return
 	
 	ClearLevel()
