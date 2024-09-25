@@ -1,33 +1,39 @@
 extends Node
 
+var DefaultGameVolume = -25
+var BaseObjectsSpawnHeight = .5
+var BallFather = preload("res://Objects/ball.tscn")
 var CONTROLS_PRESSED = {
 	'LEFT': false,
 	'RIGHT': false,
 }
+var Level = LoadLevel()
 
-var ItemsFixedHeightSpwnThing = .5
-
-var BallFather = preload("res://Objects/ball.tscn")
-
-var Level
-
-# TODO Scan directories for names instead ?
+# TODO Scan directories for names instead if its possible
 var LevelCodes = [
 	'1',
 ]
 var ItemCodes = [
-	'cruncher'
+	'cruncher',
 ]
 
-func Round(Number:float, Digit:int = 0) -> float:
-	# Godot doesnt provide a func to round to a specific digit after the floating point
+# GENERAL
+
+func Round(Number:float, Digit:int) -> float:
 	return round(Number * pow(10.0, Digit)) / pow(10.0, Digit)
 
 func Random(Min:int = 0, Max:int = 100) -> int:
 	return randi() % (Max - Min + 1) + Min
 
 func Proc(Chance:float = 50) -> bool:
-	return Random() > 50
+	return Random() < Chance
+
+# GODOT
+
+func SetGeneralVolume(Value:float = DefaultGameVolume):
+	AudioServer.set_bus_volume_db(AudioServer.get_bus_index("Master"), Value)
+
+# GAMEPLAY
 
 func SillyFreeze(TimeScale:float = 0.02):
 	Engine.time_scale = TimeScale
@@ -39,7 +45,7 @@ func SpawnBall(Position:Vector3 = Vector3.ZERO, Direction:Vector3 = Vector3.FORW
 	var NewBall = BallFather.instantiate()
 	
 	NewBall.position = Position
-	NewBall.position.y = ItemsFixedHeightSpwnThing
+	NewBall.position.y = BaseObjectsSpawnHeight
 	NewBall.dir = Direction
 	NewBall.speed = Speed
 	
@@ -52,7 +58,7 @@ func SpawnPickup(Position:Vector3 = Vector3.ZERO, PickupCode:String = ItemCodes.
 	var NewPickup = PickupScene.instantiate()
 	
 	NewPickup.position = Position
-	NewPickup.position.y = ItemsFixedHeightSpwnThing
+	NewPickup.position.y = BaseObjectsSpawnHeight
 	
 	add_child(NewPickup)
 
@@ -97,8 +103,10 @@ func CountBalls() -> int:
 			Count += 1
 	return Count
 
+# GODOT FUNCTIONS
+
 func _input(Event:InputEvent):
-	# Not sure how it could be optimised more
+	# Not sure if it could be optimised more
 	if not Event.is_pressed() and not Event.is_released(): return
 	
 	# Better approach would be to check (in the passed Event arg) which action was just pressed / unpressed instead of looping through them all
@@ -107,3 +115,6 @@ func _input(Event:InputEvent):
 			CONTROLS_PRESSED[CONTROLS_NAME] = true
 		elif Input.is_action_just_released(CONTROLS_NAME):
 			CONTROLS_PRESSED[CONTROLS_NAME] = false
+
+func _ready() -> void:
+	SetGeneralVolume()

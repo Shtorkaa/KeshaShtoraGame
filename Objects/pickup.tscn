@@ -1,9 +1,15 @@
-[gd_scene load_steps=2 format=3 uid="uid://dx8u0aij75f5b"]
+[gd_scene load_steps=3 format=3 uid="uid://dx8u0aij75f5b"]
 
 [ext_resource type="Script" path="res://Script/Pickup.gd" id="1_ctkb6"]
 
+[sub_resource type="BoxShape3D" id="BoxShape3D_lxyaf"]
+size = Vector3(2, 2, 2)
+
 [node name="Pickup" type="Area3D"]
 script = ExtResource("1_ctkb6")
+
+[node name="Hitbox" type="CollisionShape3D" parent="."]
+shape = SubResource("BoxShape3D_lxyaf")
 
 [node name="Afterlife" type="Timer" parent="."]
 wait_time = 7.0
@@ -11,6 +17,4 @@ one_shot = true
 
 [connection signal="body_entered" from="." to="." method="_on_body_entered"]
 [connection signal="collected" from="." to="." method="_on_collected"]
-[connection signal="dead" from="." to="." method="_on_dead"]
-[connection signal="out_of_map_bounds" from="." to="." method="_on_out_of_map_bounds"]
 [connection signal="timeout" from="Afterlife" to="." method="_on_afterlife_timeout"]

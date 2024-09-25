@@ -1,4 +1,4 @@
-- Turn the ball into a static body instead of rigid, since we're not using the rigidy body functionality ?
 - Turn wall and eraser hitboxes into world border type ones
-- Replace wall root node with basic 3d node instead of static body since it requires a collider present
-- Finish the same thing i did with pickup signals system on bricks to create brick variations
+- Finish the same thing i did with pickup signals system on bricks and the ball to be able to create variations
+- Look up if there a way to replace Node is ClassName type checks with a switch case construction
+? Problem of having both Stage and Game objects can be solved by spawning all nodes that Stage holds using a script of Game node, which is kinda annoying at the current game state but would be good to inevitably implement imo

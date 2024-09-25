@@ -1,12 +1,9 @@
-[gd_scene load_steps=6 format=3 uid="uid://dwfrrknu77cia"]
+[gd_scene load_steps=5 format=3 uid="uid://dwfrrknu77cia"]
 
 [ext_resource type="PackedScene" uid="uid://dx8u0aij75f5b" path="res://Objects/pickup.tscn" id="1_txtsp"]
 [ext_resource type="AudioStream" uid="uid://du45nlolbf0m1" path="res://Sounds/munch-sound-effect.mp3" id="2_13v57"]
 [ext_resource type="Texture2D" uid="uid://bnhijwv6oa8rm" path="res://Sprites/Cruncher.png" id="2_o8i3h"]
 [ext_resource type="Script" path="res://Script/Pickups/Pickup_cruncher.gd" id="2_up0mn"]
-
-[sub_resource type="BoxShape3D" id="BoxShape3D_se2gg"]
-size = Vector3(2, 2, 2)
 
 [node name="Pickup" instance=ExtResource("1_txtsp")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
@@ -16,8 +13,5 @@ script = ExtResource("2_up0mn")
 transform = Transform3D(0.25, 0, 0, 0, 0.25, 0, 0, 0, 0.25, 0, 0, 0)
 texture = ExtResource("2_o8i3h")
 
-[node name="Hitbox" type="CollisionShape3D" parent="." index="1"]
-shape = SubResource("BoxShape3D_se2gg")
-
-[node name="SoundCollect" type="AudioStreamPlayer" parent="." index="2"]
+[node name="SoundCollect" type="AudioStreamPlayer" parent="." index="3"]
 stream = ExtResource("2_13v57")

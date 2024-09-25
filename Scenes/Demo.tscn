@@ -1,7 +1,6 @@
-[gd_scene load_steps=8 format=3 uid="uid://4bm00lqekqmo"]
+[gd_scene load_steps=7 format=3 uid="uid://4bm00lqekqmo"]
 
 [ext_resource type="PackedScene" uid="uid://c3f0r8mk1rw5b" path="res://Objects/paddle.tscn" id="1_0ufe6"]
-[ext_resource type="Script" path="res://Script/Stage.gd" id="1_qw11p"]
 [ext_resource type="PackedScene" uid="uid://3v7yyyi1y64u" path="res://Objects/wall.tscn" id="3_34q70"]
 [ext_resource type="PackedScene" uid="uid://rxlsg2agbmrs" path="res://Objects/ground.tscn" id="3_unaqp"]
 [ext_resource type="AudioStream" uid="uid://ctugow7j5pa78" path="res://Sounds/prepare-thyself.mp3" id="5_ilkq2"]
@@ -9,16 +8,14 @@
 
 [sub_resource type="Environment" id="Environment_mhmr0"]
 background_mode = 1
-background_color = Color(0.967035, 0.754247, 0.363371, 1)
 
 [node name="Stage" type="Node3D"]
-script = ExtResource("1_qw11p")
 
 [node name="Environment" type="WorldEnvironment" parent="."]
 environment = SubResource("Environment_mhmr0")
 
 [node name="Sun" type="DirectionalLight3D" parent="."]
-transform = Transform3D(0.532575, 0.108664, -0.839379, 0.846262, -0.0851569, 0.525918, -0.0143303, -0.990424, -0.137311, 0, 0, 0)
+transform = Transform3D(0.208833, 0.977838, -0.0148532, 0.400559, -0.0716708, 0.913464, 0.892155, -0.196711, -0.406649, 0, 0, 0)
 
 [node name="Paddle" parent="." instance=ExtResource("1_0ufe6")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.25, -6.59721)
