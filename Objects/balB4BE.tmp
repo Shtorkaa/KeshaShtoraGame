@@ -14,7 +14,6 @@ radial_segments = 8
 rings = 8
 
 [node name="Ball_1" type="StaticBody3D"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 0)
 axis_lock_linear_y = true
 axis_lock_angular_x = true
 axis_lock_angular_y = true

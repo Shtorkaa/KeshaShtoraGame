@@ -1,7 +1,8 @@
 extends Node
 
-var DefaultGameVolume = -25
-var BaseObjectsSpawnHeight = .5
+var DefaultGameVolume = -20
+var BallsSpawnHeight = .5
+var PickupsSpawnHeight = 1
 var BallFather = preload("res://Objects/ball.tscn")
 var CONTROLS_PRESSED = {
 	'LEFT': false,
@@ -11,7 +12,7 @@ var CONTROLS_PRESSED = {
 
 # TODO Scan directories for names instead if its possible
 var LevelCodes = [
-	'1', '2',
+	'1',
 ]
 var ItemCodes = [
 	'cruncher',
@@ -41,11 +42,11 @@ func SillyFreeze(TimeScale:float = 0.02):
 	await SillyFreezeTimer.timeout
 	Engine.time_scale = 1
 
-func SpawnBall(Position:Vector3 = Vector3.ZERO, Direction:Vector3 = Vector3.FORWARD, Speed:float = 8.0):
+func SpawnBall(Position:Vector3 = Vector3.ZERO, Direction:Vector3 = -Vector3.FORWARD, Speed:float = 8.0):
 	var NewBall = BallFather.instantiate()
 	
 	NewBall.position = Position
-	NewBall.position.y = BaseObjectsSpawnHeight
+	NewBall.position.y = BallsSpawnHeight
 	NewBall.dir = Direction
 	NewBall.speed = Speed
 	
@@ -58,7 +59,7 @@ func SpawnPickup(Position:Vector3 = Vector3.ZERO, PickupCode:String = ItemCodes.
 	var NewPickup = PickupScene.instantiate()
 	
 	NewPickup.position = Position
-	NewPickup.position.y = BaseObjectsSpawnHeight
+	NewPickup.position.y = PickupsSpawnHeight
 	
 	add_child(NewPickup)
 
@@ -83,9 +84,10 @@ func LoadLevel(LevelCode:String = LevelCodes.pick_random()):
 	
 	return Level
 
+# SILLY CHECKS
+
 func IsLevelCleared():
-	if !Level:
-		return true
+	if !Level: return true
 	
 	for LevelElement in Level.get_children():
 		if LevelElement is Brick and LevelElement.is_dead == false:
@@ -104,6 +106,9 @@ func CountBalls() -> int:
 		if GameElement is Ball and GameElement.is_dead == false: # Only counts alive balls
 			Count += 1
 	return Count
+
+func BallsEndedCheck():
+	if CountBalls() < 1: SpawnBall()
 
 # GODOT FUNCTIONS
 

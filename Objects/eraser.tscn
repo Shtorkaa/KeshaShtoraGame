@@ -1,4 +1,4 @@
-[gd_scene load_steps=7 format=3 uid="uid://dpv8eyyf4bdnl"]
+[gd_scene load_steps=8 format=3 uid="uid://dpv8eyyf4bdnl"]
 
 [ext_resource type="Script" path="res://Script/Eraser.gd" id="1_orwad"]
 [ext_resource type="Texture2D" uid="uid://lntl3ll07sbq" path="res://Sprites/Eraser.png" id="2_atu2v"]
@@ -12,9 +12,10 @@ albedo_texture = ExtResource("2_atu2v")
 
 [sub_resource type="QuadMesh" id="QuadMesh_plscr"]
 
+[sub_resource type="BoxMesh" id="BoxMesh_ep1v1"]
+
 [node name="Eraser_1" type="Area3D"]
 collision_layer = 0
-monitorable = false
 script = ExtResource("1_orwad")
 
 [node name="Hitbox" type="CollisionShape3D" parent="."]
@@ -30,5 +31,9 @@ skeleton = NodePath("")
 [node name="UselessFnNccgd" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("3_xm11m")
 
+[node name="DeleteWhenFixedEraserScript" type="MeshInstance3D" parent="."]
+mesh = SubResource("BoxMesh_ep1v1")
+
 [connection signal="area_entered" from="." to="." method="_on_area_entered"]
 [connection signal="body_entered" from="." to="." method="_on_body_entered"]
+[connection signal="body_shape_entered" from="." to="." method="_on_body_shape_entered"]

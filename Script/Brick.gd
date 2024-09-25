@@ -28,7 +28,3 @@ func _physics_process(delta: float) -> void:
 
 func _on_afterlife_timeout() -> void:
 	queue_free()
-
-func _on_died() -> void:
-	print('NOT!')
-	Game.SpawnPickup(position)

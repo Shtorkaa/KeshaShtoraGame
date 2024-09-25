@@ -2,15 +2,12 @@
 
 [ext_resource type="PackedScene" uid="uid://b0dwi4hqp7fy" path="res://Objects/Bricks/brick_cube.tscn" id="1_jjqo3"]
 [ext_resource type="PackedScene" uid="uid://dpj0wl1du3qi2" path="res://Objects/Bricks/brick_lootbox.tscn" id="2_6y3ry"]
-[ext_resource type="Script" path="res://Script/Brick.gd" id="3_mqd2a"]
+[ext_resource type="PackedScene" uid="uid://blac23dbbkxkw" path="res://Objects/Bricks/brick_ball.tscn" id="3_l44sy"]
 
 [node name="Level" type="Node3D"]
 
 [node name="Brick" parent="." instance=ExtResource("1_jjqo3")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.5, -2)
-
-[node name="Brick2" parent="." instance=ExtResource("1_jjqo3")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4, 1.5, 0)
 
 [node name="Brick4" parent="." instance=ExtResource("1_jjqo3")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2, 4.5, -1)
@@ -33,14 +30,14 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 7.5, 0)
 [node name="Brick12" parent="." instance=ExtResource("1_jjqo3")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2, 10.5, 0)
 
-[node name="Brick3" parent="." instance=ExtResource("2_6y3ry")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4, 1.5, 0)
-script = ExtResource("3_mqd2a")
-
-[node name="Brick5" parent="." instance=ExtResource("2_6y3ry")]
+[node name="Brick_1" parent="." instance=ExtResource("2_6y3ry")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2, 4.5, -1)
-script = ExtResource("3_mqd2a")
 
-[node name="Brick11" parent="." instance=ExtResource("2_6y3ry")]
+[node name="Brick_2" parent="." instance=ExtResource("2_6y3ry")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4, 1.5, 0)
+
+[node name="Brick_3" parent="." instance=ExtResource("2_6y3ry")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2, 10.5, 0)
-script = ExtResource("3_mqd2a")
+
+[node name="Brick_4" parent="." instance=ExtResource("3_l44sy")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4, 1.5, 0)

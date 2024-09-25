@@ -1,14 +1,23 @@
-[gd_scene load_steps=7 format=3 uid="uid://4bm00lqekqmo"]
+[gd_scene load_steps=12 format=3 uid="uid://4bm00lqekqmo"]
 
 [ext_resource type="PackedScene" uid="uid://c3f0r8mk1rw5b" path="res://Objects/paddle.tscn" id="1_0ufe6"]
 [ext_resource type="PackedScene" uid="uid://3v7yyyi1y64u" path="res://Objects/wall.tscn" id="3_34q70"]
 [ext_resource type="PackedScene" uid="uid://rxlsg2agbmrs" path="res://Objects/ground.tscn" id="3_unaqp"]
 [ext_resource type="AudioStream" uid="uid://ctugow7j5pa78" path="res://Sounds/prepare-thyself.mp3" id="5_ilkq2"]
 [ext_resource type="PackedScene" uid="uid://dpv8eyyf4bdnl" path="res://Objects/eraser.tscn" id="6_pbsx2"]
+[ext_resource type="Script" path="res://Scenes/static_body_3d.gd" id="6_x6tv3"]
+[ext_resource type="Script" path="res://Scenes/area_3d.gd" id="7_spm4i"]
 
 [sub_resource type="Environment" id="Environment_mhmr0"]
 background_mode = 1
 background_color = Color(1, 0.717022, 0.320163, 1)
+
+[sub_resource type="BoxMesh" id="BoxMesh_26ojy"]
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_rdgaj"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_wnekd"]
+size = Vector3(6, 6, 6)
 
 [node name="Stage" type="Node3D"]
 
@@ -19,10 +28,10 @@ environment = SubResource("Environment_mhmr0")
 transform = Transform3D(0.694953, 0.673489, -0.251899, 0.400559, -0.0716707, 0.913464, 0.597154, -0.735714, -0.31958, 0, 0, 0)
 
 [node name="Paddle" parent="." instance=ExtResource("1_0ufe6")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.25, -6.694)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6.65217, 0.25, -6.59721)
 
 [node name="Camera" type="Camera3D" parent="."]
-transform = Transform3D(-1, -9.13817e-09, 8.69439e-08, 0, 0.994522, 0.104528, -8.74228e-08, 0.104528, -0.994522, 0, 4.5, -12)
+transform = Transform3D(-1, -1.81293e-14, -8.74228e-08, -1.39276e-08, 0.987228, 0.159313, 8.63062e-08, 0.159313, -0.987228, 0, 3.84506, -11.7843)
 
 [node name="Map" type="Node3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 6.52689)
@@ -39,9 +48,29 @@ transform = Transform3D(-1.31134e-06, 0, -1, 0, 6, 0, 30, 0, -4.37114e-08, -15, 
 transform = Transform3D(-1.31134e-06, 0, 1, 0, 6, 0, -30, 0, -4.37114e-08, 15, 0, 0)
 
 [node name="Eraser" parent="Map" instance=ExtResource("6_pbsx2")]
-transform = Transform3D(-1, 0, -1.50996e-07, 0, 1, 0, 1.50996e-07, 0, -1, 0, 0, -13.725)
-collision_layer = 7
+transform = Transform3D(-1, 0, -1.50996e-07, 0, 1, 0, 1.50996e-07, 0, -1, 0, 0, -15)
 
 [node name="Prepare-thyself" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("5_ilkq2")
 autoplay = true
+
+[node name="StaticBody3D" type="StaticBody3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.33129, -0.680064)
+script = ExtResource("6_x6tv3")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="StaticBody3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1.33129, 0.680064)
+mesh = SubResource("BoxMesh_26ojy")
+skeleton = NodePath("../..")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="StaticBody3D"]
+shape = SubResource("SphereShape3D_rdgaj")
+
+[node name="Area3D" type="Area3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -6.50669)
+script = ExtResource("7_spm4i")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Area3D"]
+shape = SubResource("BoxShape3D_wnekd")
+
+[connection signal="body_entered" from="Area3D" to="Paddle" method="_on_area_3d_body_entered"]
