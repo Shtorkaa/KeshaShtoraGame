@@ -17,6 +17,9 @@ var LevelCodes = [
 var ItemCodes = [
 	'cruncher',
 ]
+var EffectCodes = [
+	'speed'
+]
 
 # GENERAL
 
@@ -83,6 +86,17 @@ func LoadLevel(LevelCode:String = LevelCodes.pick_random()):
 	SpawnBall()
 	
 	return Level
+
+func GetEffect(EffectCode:String = EffectCodes.pick_random()):
+	var EffectScene = load("res://Objects/Effects/effect_" + EffectCode + ".tscn")
+	if !EffectScene: return
+	return EffectScene.instantiate()
+
+func ApplyEffect(EffectCode:String = EffectCodes.pick_random()):
+	# TODO Optimize (Check todo list)
+	for Child in get_children():
+		if not Child is Ball: continue
+		Child.apply(EffectCode)
 
 # SILLY CHECKS
 

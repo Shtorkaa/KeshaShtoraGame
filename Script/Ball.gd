@@ -2,11 +2,16 @@ extends StaticBody3D
 class_name Ball
 
 var dir = Vector3.FORWARD
-var speed = 1.0
+var speed = 8.0
+var speed_min = 1.0
+var speed_max = 15.0
 var is_dead = false
 var remove_on_death = [
-	"Hitbox", "Model", # WARNING Required nodes
+	"Hitbox", "Model", 'Effects', # WARNING Required nodes
 ]
+var effects = {}
+
+# GENERAL
 
 func move(vector:Vector3) -> KinematicCollision3D:
 	var collision = move_and_collide(vector)
@@ -61,6 +66,48 @@ func hit(collision:KinematicCollision3D, delta:float) -> void:
 	$SoundHit.play()
 	# Tecnically makes it move faster but idc, it fixes the double hit in certain cases
 	move(dir * speed * delta)
+
+# WARNING Function is not in use, effects {} stays filled with freed objects since effect killes itslef if its a one shot but it cannot call back the ball to remove itself from {} bc it doesnt know its code
+func clear(effect_name:String):
+	if is_dead: return
+	if !effects.keys().has(effect_name): return
+	
+	effects[effect_name].kill()
+	effects.erase(effect_name)
+
+func apply(effect_name:String, duration:float = 0):
+	if is_dead: return
+	var effect
+	
+	if effects.keys().has(effect_name) and effects[effect_name] and !effects[effect_name].is_dead:
+		print('Ball effect reset duration')
+		effect = effects[effect_name]
+	else:
+		print('Ball effect applied')
+		effect = Game.GetEffect(effect_name)
+		if !effect: return
+		effects[effect_name] = effect
+		$Effects.add_child(effect)
+	
+	effect.set_one_shot(true)
+	effect.apply(duration)
+
+# SILLY CHECKS
+
+func has(effect_name:String):
+	return effects.keys().has(effect_name)
+
+# VERY SILLY
+
+func set_speed(value:float):
+	print('Ball speed set to ', value)
+	speed = clamp(value, speed_min, speed_max)
+
+func hide_model(value:bool):
+	print('Ball hidden model set to ', value)
+	$Model.visible = !value
+
+# GODOT
 
 func _physics_process(delta:float):
 	if    is_dead: return

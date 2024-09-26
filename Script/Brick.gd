@@ -6,6 +6,7 @@ var remove_on_death = [
 	"Hitbox", "Model", # WARNING Required nodes
 ]
 
+# WARNING Not a good fit for the use case
 signal died
 
 func destroy():

@@ -1,0 +1,25 @@
+[gd_scene load_steps=5 format=3 uid="uid://rhd4kfr56aop"]
+
+[ext_resource type="PackedScene" uid="uid://do6ouwg4q84aj" path="res://Objects/effect.tscn" id="1_sacif"]
+[ext_resource type="Script" path="res://Script/Effects/Effect_speed.gd" id="2_djwre"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_u37ni"]
+shading_mode = 0
+albedo_color = Color(0.556863, 0.376471, 1, 1)
+
+[sub_resource type="SphereMesh" id="SphereMesh_sr4pe"]
+material = SubResource("StandardMaterial3D_u37ni")
+radial_segments = 6
+rings = 4
+
+[node name="Effect_1" instance=ExtResource("1_sacif")]
+script = ExtResource("2_djwre")
+
+[node name="Model" type="MeshInstance3D" parent="." index="0"]
+mesh = SubResource("SphereMesh_sr4pe")
+skeleton = NodePath("")
+
+[connection signal="applied" from="." to="." method="_on_applied"]
+[connection signal="cleared" from="." to="." method="_on_cleared"]
+[connection signal="hidden" from="." to="." method="_on_hidden"]
+[connection signal="shown" from="." to="." method="_on_shown"]

@@ -27,6 +27,8 @@ shape = SubResource("SphereShape3D_j2o31")
 [node name="Model" type="MeshInstance3D" parent="."]
 mesh = SubResource("SphereMesh_a4t47")
 
+[node name="Effects" type="Node3D" parent="."]
+
 [node name="SoundHit" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("2_1bpmh")
 

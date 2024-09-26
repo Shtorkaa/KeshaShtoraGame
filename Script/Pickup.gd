@@ -1,13 +1,14 @@
 extends Area3D
 class_name Pickup
 
-var speed = 5.0
+var speed = 10.0
 var dir = Vector3(0, 0, -1)
 var is_dead = false
 var delete_on_death = [
 	'Model', 'Hitbox', # WARNING Required nodes
 ]
 
+# WARNING Not a good fit for the use case
 signal collected
 signal died
 

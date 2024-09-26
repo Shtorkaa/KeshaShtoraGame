@@ -1,0 +1,24 @@
+[gd_scene load_steps=2 format=3 uid="uid://do6ouwg4q84aj"]
+
+[ext_resource type="Script" path="res://Script/Effect.gd" id="1_38lea"]
+
+[node name="Effect_1" type="Node3D"]
+script = ExtResource("1_38lea")
+
+[node name="Duration" type="Timer" parent="."]
+one_shot = true
+
+[node name="Ending" type="Timer" parent="."]
+one_shot = true
+
+[node name="EndingTick" type="Timer" parent="."]
+one_shot = true
+
+[node name="Afterlife" type="Timer" parent="."]
+wait_time = 7.0
+one_shot = true
+
+[connection signal="timeout" from="Duration" to="." method="_on_duration_timeout"]
+[connection signal="timeout" from="Ending" to="." method="_on_ending_timeout"]
+[connection signal="timeout" from="EndingTick" to="." method="_on_ending_tick_timeout"]
+[connection signal="timeout" from="Afterlife" to="." method="_on_afterlife_timeout"]
