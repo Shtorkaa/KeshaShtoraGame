@@ -21,8 +21,10 @@ signal hidden
 func apply(duration:float = default_duration):
 	print('Applied an effect')
 	active = true
-	if duration <= 0: duration = default_duration
-	else: duration = clamp(duration, minimum_duration, maximum_duration)
+	if duration <= 0:
+		duration = default_duration
+	else:
+		duration = clamp(duration, minimum_duration, maximum_duration)
 	$Duration.wait_time = duration
 	$Duration.start(0)
 	$Ending.wait_time = duration - minimum_duration

@@ -4,7 +4,7 @@ class_name Ball
 var dir = Vector3.FORWARD
 var speed = 8.0
 var speed_min = 1.0
-var speed_max = 15.0
+var speed_max = 25.0
 var is_dead = false
 var remove_on_death = [
 	"Hitbox", "Model", 'Effects', # WARNING Required nodes
@@ -79,7 +79,7 @@ func apply(effect_name:String, duration:float = 0):
 	if is_dead: return
 	var effect
 	
-	if effects.keys().has(effect_name) and effects[effect_name] and !effects[effect_name].is_dead:
+	if effects.keys().has(effect_name) and 'is_dead' in effects[effect_name] and !effects[effect_name].is_dead:
 		print('Ball effect reset duration')
 		effect = effects[effect_name]
 	else:
