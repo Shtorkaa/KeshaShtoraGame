@@ -137,5 +137,15 @@ func _input(Event:InputEvent):
 		elif Input.is_action_just_released(CONTROLS_NAME):
 			CONTROLS_PRESSED[CONTROLS_NAME] = false
 
+func test():
+	print('Hi, Im Peter Griffin')
+
 func _ready() -> void:
 	SetGeneralVolume()
+	
+	var a = ModifiableFloat.new(10, 0, 100, Callable(self, 'test'))
+	
+	a.set_modifier('boots', 8)
+	a.set_modifier('haste_rune', 50, ModifiableFloat.operations.percent)
+	a.set_modifier('slowing_mud', -25, ModifiableFloat.operations.percent)
+	a.remove_modifier('haste_rune')

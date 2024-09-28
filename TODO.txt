@@ -2,3 +2,6 @@
 ? Problem of having both Stage and Game objects can be solved by spawning all nodes that Stage holds using a script of Game node, which is kinda annoying at the current game state but would be good to inevitably implement imo
 ! Fix Area3D (ERASER) not detecting StaticBody3D (BALL) moving into it
 - Load all balls into one node (dont forget to update ApplyEffect)
+
+- Make ModifiableFloat also fit for integers
+- Add operation variations to ModifiableFloat (like BASE_PERCENTAGES, adds percents from base value)

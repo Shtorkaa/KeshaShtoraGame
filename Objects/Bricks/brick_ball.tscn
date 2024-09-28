@@ -13,7 +13,7 @@ albedo_color = Color(1, 0.560784, 0.541176, 1)
 material = SubResource("StandardMaterial3D_cs722")
 size = Vector3(3, 3, 3)
 
-[node name="Brick_1" instance=ExtResource("1_iwkos")]
+[node name="Brick" instance=ExtResource("1_iwkos")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.5, 0)
 script = ExtResource("2_c20on")
 

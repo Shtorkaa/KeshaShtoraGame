@@ -5,7 +5,7 @@
 [ext_resource type="Texture2D" uid="uid://bnhijwv6oa8rm" path="res://Sprites/Cruncher.png" id="2_o8i3h"]
 [ext_resource type="Script" path="res://Script/Pickups/Pickup_cruncher.gd" id="2_up0mn"]
 
-[node name="Pickup_1" instance=ExtResource("1_txtsp")]
+[node name="Pickup" instance=ExtResource("1_txtsp")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
 script = ExtResource("2_up0mn")
 

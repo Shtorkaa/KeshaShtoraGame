@@ -12,7 +12,7 @@ material = SubResource("StandardMaterial3D_u37ni")
 radial_segments = 6
 rings = 4
 
-[node name="Effect_1" instance=ExtResource("1_sacif")]
+[node name="Effect" instance=ExtResource("1_sacif")]
 script = ExtResource("2_djwre")
 
 [node name="Model" type="MeshInstance3D" parent="." index="0"]
