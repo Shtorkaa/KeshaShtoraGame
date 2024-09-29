@@ -9,6 +9,7 @@ var modifications:Dictionary = {}
 const  operations:Dictionary = {
 	'add': 'ADDITION',
 	'percent': 'PERCENTAGES',
+	'fixed': 'FIXED_VALUE',
 }
 
 signal update
@@ -51,6 +52,7 @@ func update_value() -> void:
 	value = base_value
 	modifications = {
 		# NOTE Operations are performed top to bottom
+		operations.fixed: null,
 		operations.add: 0.0,
 		operations.percent: 100.0,
 	}
@@ -58,14 +60,24 @@ func update_value() -> void:
 	print(modifiers)
 	
 	for modifier in modifiers.values():
-		modifications[modifier.operation] += modifier.value
+		match modifier.operation:
+			operations.fixed:
+				modifications[modifier.operation] = modifier.value
+			_:
+				modifications[modifier.operation] += modifier.value
 		
 	print(modifications, ', ', value)
 	
 	for modification_type in modifications.keys():
+		var modification_value = modifications[modification_type]
 		match modification_type:
+			operations.fixed:
+				if modification_value == null: continue
+				value = modification_value
+				break
 			operations.add:
-				value += modifications[modification_type]
+				value += modification_value
 			operations.percent:
-				value = value / 100 * modifications[modification_type]
+				value = value / 100 * modification_value
+	
 	clamp_value()

@@ -4,4 +4,4 @@
 - Load all balls into one node (dont forget to update ApplyEffect)
 
 - Make ModifiableFloat also fit for integers
-- Add operation variations to ModifiableFloat (like BASE_PERCENTAGES, adds percents from base value)
+? Could optimize ModifiableFloat's fixed value execution (not sure what to do with modifications when half way thour modifiers it finds a fixed value, either count to finish or reset to some defaullt values imo)
