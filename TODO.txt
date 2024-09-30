@@ -1,9 +1,10 @@
 - Turn wall and eraser hitboxes into world border type ones
 ? Problem of having both Stage and Game objects can be solved by spawning all nodes that Stage holds using a script of Game node, which is kinda annoying at the current game state but would be good to inevitably implement imo
+! Fix Bricks forgetting they have gravity (check brick.gd notes for more info)
 ! Fix Area3D (ERASER) not detecting StaticBody3D (BALL) moving into it
 - Load all balls into one node (dont forget to update ApplyEffect)
+? Maybe load Balls, Pickups and Bricks into Level; But then whats the point of Level node itslf
 
 - Make ModifiableFloat also fit for integers
 ? Could optimize ModifiableFloat's fixed value execution (not sure what to do with modifications when half way thour modifiers it finds a fixed value, either count to finish or reset to some defaullt values imo)
-
-epple? :3
+! Round operation should perhaps be moved to after clamp in ModifiableFloat, in case the bounds are non integer

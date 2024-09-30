@@ -9,8 +9,8 @@ var modifications:Dictionary = {}
 const  operations:Dictionary = {
 	'add': 'ADDITION',
 	'percent': 'PERCENTAGES',
-	'round': 'ROUND_VALUE',
 	'fixed': 'FIXED_VALUE',
+	'round': 'ROUND',
 }
 
 signal update
@@ -57,7 +57,6 @@ func update_value() -> void:
 		operations.add: 0.0,
 		operations.percent: 100.0,
 		operations.round: null,
-
 	}
 	
 	print(modifiers)
@@ -67,7 +66,7 @@ func update_value() -> void:
 			operations.fixed:
 				modifications[modifier.operation] = modifier.value
 			operations.round:
-				modifications[modifier.operation] = modifier.value
+				modifications[modifier.operation] = int(modifier.value)
 			_:
 				modifications[modifier.operation] += modifier.value
 		
@@ -86,9 +85,11 @@ func update_value() -> void:
 				value = value / 100 * modification_value
 			operations.round:
 				if modification_value == null: continue
-				value = special_round(value,modification_value)
+				print(1111111111111111, ', ', value)
+				# WARNING TEMP FIX
+				value = Game.Round(value, modification_value)
+				# value = (value * pow(10.0, modification_value)) / pow(10.0, modification_value)
+				# ^ Not working
+				print(1111111111111111, ', ', value)
 	
 	clamp_value()
-
-func special_round(number:float,digit:float = 0):
-	return (number * pow(10.0, digit)) / pow(10.0, digit)
