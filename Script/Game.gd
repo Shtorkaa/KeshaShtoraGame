@@ -146,7 +146,8 @@ func _ready() -> void:
 	var FunnySpeed = ModifiableFloat.new(10, 0, 100, Callable(self, 'test'))
 	
 	FunnySpeed.set_modifier('boots', 8)
-	FunnySpeed.set_modifier('haste_rune', 50, ModifiableFloat.operations.percent)
+	FunnySpeed.set_modifier('haste_rune', 35, ModifiableFloat.operations.percent)
+	FunnySpeed.set_modifier('round_pls', 1, ModifiableFloat.operations.round)
 	FunnySpeed.set_modifier('slowing_mud', -25, ModifiableFloat.operations.percent)
 	FunnySpeed.set_modifier('strong_debuff', 6, ModifiableFloat.operations.fixed)
 	FunnySpeed.remove_modifier('haste_rune')

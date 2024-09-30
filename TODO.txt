@@ -5,3 +5,5 @@
 
 - Make ModifiableFloat also fit for integers
 ? Could optimize ModifiableFloat's fixed value execution (not sure what to do with modifications when half way thour modifiers it finds a fixed value, either count to finish or reset to some defaullt values imo)
+
+epple? :3

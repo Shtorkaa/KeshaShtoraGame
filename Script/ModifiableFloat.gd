@@ -9,6 +9,7 @@ var modifications:Dictionary = {}
 const  operations:Dictionary = {
 	'add': 'ADDITION',
 	'percent': 'PERCENTAGES',
+	'round': 'ROUND_VALUE',
 	'fixed': 'FIXED_VALUE',
 }
 
@@ -55,6 +56,8 @@ func update_value() -> void:
 		operations.fixed: null,
 		operations.add: 0.0,
 		operations.percent: 100.0,
+		operations.round: null,
+
 	}
 	
 	print(modifiers)
@@ -62,6 +65,8 @@ func update_value() -> void:
 	for modifier in modifiers.values():
 		match modifier.operation:
 			operations.fixed:
+				modifications[modifier.operation] = modifier.value
+			operations.round:
 				modifications[modifier.operation] = modifier.value
 			_:
 				modifications[modifier.operation] += modifier.value
@@ -79,5 +84,11 @@ func update_value() -> void:
 				value += modification_value
 			operations.percent:
 				value = value / 100 * modification_value
+			operations.round:
+				if modification_value == null: continue
+				value = special_round(value,modification_value)
 	
 	clamp_value()
+
+func special_round(number:float,digit:float = 0):
+	return (number * pow(10.0, digit)) / pow(10.0, digit)
