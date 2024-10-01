@@ -74,9 +74,9 @@ func update_value() -> void:
 	
 	for modification_type in modifications.keys():
 		var modification_value = modifications[modification_type]
+		if modification_value == null: continue
 		match modification_type:
 			operations.fixed:
-				if modification_value == null: continue
 				value = modification_value
 				break
 			operations.add:
@@ -84,12 +84,7 @@ func update_value() -> void:
 			operations.percent:
 				value = value / 100 * modification_value
 			operations.round:
-				if modification_value == null: continue
-				print(1111111111111111, ', ', value)
-				# WARNING TEMP FIX
-				value = Game.Round(value, modification_value)
-				# value = (value * pow(10.0, modification_value)) / pow(10.0, modification_value)
-				# ^ Not working
-				print(1111111111111111, ', ', value)
+				value = round(value * pow(10.0, modification_value)) / pow(10.0, modification_value)
+		print(modification_type, ' ', modification_value, ' -> ', value)
 	
 	clamp_value()
