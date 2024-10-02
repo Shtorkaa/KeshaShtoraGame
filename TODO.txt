@@ -5,6 +5,6 @@
 - Load all balls into one node (dont forget to update ApplyEffect)
 ? Maybe load Balls, Pickups and Bricks into Level; But then whats the point of Level node itslf
 
-- Make ModifiableFloat also fit for integers
 ? Could optimize ModifiableFloat's fixed value execution (not sure what to do with modifications when half way thour modifiers it finds a fixed value, either count to finish or reset to some defaullt values imo)
 ! Round operation should perhaps be moved to after clamp in ModifiableFloat, in case the bounds are non integer
+- Check TODO in ModifiableFloat.gd end

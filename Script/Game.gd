@@ -143,11 +143,10 @@ func test():
 func _ready() -> void:
 	SetGeneralVolume()
 	
-	var FunnySpeed = ModifiableFloat.new(10, 0, 100, Callable(self, 'test'))
+	var FunnySpeed = ModifiableFloat.new(10, 0, 1.1399245, Callable(self, 'test'), 2)
 	
-	FunnySpeed.set_modifier('boots', 8)
-	FunnySpeed.set_modifier('haste_rune', 19.223, ModifiableFloat.operations.percent)
-	FunnySpeed.set_modifier('slowing_mud', -25, ModifiableFloat.operations.percent)
-	FunnySpeed.set_modifier('rounder', 0, ModifiableFloat.operations.round)
-	FunnySpeed.set_modifier('strong_debuff', 6, ModifiableFloat.operations.fixed)
-	FunnySpeed.remove_modifier('haste_rune')
+	# FunnySpeed.set_modifier('boots', 8)
+	# FunnySpeed.set_modifier('haste_rune', 52.96, ModifiableFloat.operations.percent)
+	# FunnySpeed.set_modifier('slowing_mud', -25, ModifiableFloat.operations.percent)
+	# FunnySpeed.set_modifier('strong_debuff', 6, ModifiableFloat.operations.fixed)
+	# FunnySpeed.remove_modifier('haste_rune')
