@@ -11,14 +11,15 @@ var CONTROLS_PRESSED = {
 @onready var Level = LoadLevel()
 
 # TODO Scan directories for names instead if its possible
-var LevelCodes = [
+const LevelCodes = [
 	'1',
 ]
-var ItemCodes = [
+const ItemCodes = [
 	'cruncher',
 ]
-var EffectCodes = [
-	'speed'
+const EffectCodes = [
+	'speed',
+	'paddle_boost',
 ]
 
 # GENERAL
@@ -45,13 +46,14 @@ func SillyFreeze(TimeScale:float = 0.02):
 	await SillyFreezeTimer.timeout
 	Engine.time_scale = 1
 
-func SpawnBall(Position:Vector3 = Vector3.ZERO, Direction:Vector3 = -Vector3.FORWARD, Speed:float = 8.0):
+func SpawnBall(Position:Vector3 = Vector3.ZERO, Direction:Vector3 = -Vector3.FORWARD, BaseSpeed:float = -1):
 	var NewBall = BallFather.instantiate()
 	
 	NewBall.position = Position
 	NewBall.position.y = BallsSpawnHeight
 	NewBall.dir = Direction
-	NewBall.speed = Speed
+	if BaseSpeed >= 0:
+		NewBall.speed.set_base_value(BaseSpeed)
 	
 	add_child(NewBall)
 
@@ -143,10 +145,11 @@ func test():
 func _ready() -> void:
 	SetGeneralVolume()
 	
-	var FunnySpeed = ModifiableFloat.new(10, 0, 100, Callable(self, 'test'), 2)
-	
-	FunnySpeed.set_modifier('boots', 8)
-	FunnySpeed.set_modifier('haste_rune', 52.96, ModifiableFloat.operations.percent)
-	FunnySpeed.set_modifier('slowing_mud', -25, ModifiableFloat.operations.percent, true)
-	# FunnySpeed.set_modifier('strong_debuff', 6, ModifiableFloat.operations.fixed)
-	# FunnySpeed.remove_modifier('haste_rune')
+	#var FunnySpeed = ModifiableFloat.new(10, 0, 100, Callable(self, 'test'), 2)
+	#
+	#FunnySpeed.set_modifier('boots', 8)
+	#FunnySpeed.set_modifier('haste_rune', 52.96, ModifiableFloat.operations.percent)
+	#FunnySpeed.set_modifier('slowing_mud', -25, ModifiableFloat.operations.percent)
+	#FunnySpeed.set_modifier('strong_debuff', 6, ModifiableFloat.operations.fixed, true)
+	#
+	#Game.ApplyEffect()

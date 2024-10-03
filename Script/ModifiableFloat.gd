@@ -7,9 +7,9 @@ var base_value:float
 var   truncate:int
 const  operations:Dictionary = {
 	# NOTE Operations are performed top to bottom
+	'fixed': 'FIXED_VALUE',
 	'add': 'ADDITION',
 	'percent': 'PERCENTAGES',
-	'fixed': 'FIXED_VALUE',
 }
 var     modifiers:Dictionary = {}
 var modifications:Dictionary = {}
@@ -105,12 +105,13 @@ func update_value(debug: bool = false) -> void:
 	if debug: print(' RESET TO BASE VALUE ', value, ' -> ', new_value)
 	
 	if debug: print(' APPLYING MODIFICATIONS **')
-	for modification_type in modifications.keys():
+	for modification_type in operations.values():
+		if not modification_type in modifications: continue
 		var modification_value = modifications[modification_type]
-		if modification_value == null: continue
 		match modification_type:
 			operations.fixed:
 				new_value = modification_value
+				if debug: print('  ', modification_type, ' ', modification_value, ' -> ', new_value)
 				break
 			operations.add:
 				new_value += modification_value

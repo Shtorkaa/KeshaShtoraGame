@@ -18,20 +18,29 @@ signal cleared
 signal shown
 signal hidden
 
-func apply(duration:float = default_duration):
+# TODO Rename to start
+func start(duration:float = default_duration):
 	print('Applied an effect')
 	active = true
 	if duration <= 0:
 		duration = default_duration
 	else:
 		duration = clamp(duration, minimum_duration, maximum_duration)
-	$Duration.wait_time = duration
-	$Duration.start(0)
-	$Ending.wait_time = duration - minimum_duration
-	$Ending.start(0)
-	$EndingTick.stop()
+	refresh(duration)
 	applied.emit()
 	expose(true)
+
+func get_time_left() -> float:
+	return $Duration.time_left
+
+func refresh(new_duration:float = default_duration):
+	if !active: return
+	if get_time_left() > new_duration: return
+	$Duration.wait_time = new_duration
+	$Duration.start(0)
+	$Ending.wait_time = new_duration - minimum_duration
+	$Ending.start(0)
+	$EndingTick.stop()
 
 func clear():
 	if !active: return

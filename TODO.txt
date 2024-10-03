@@ -8,3 +8,13 @@
 ? Set modifier on ModifiableFloat should return self to allow for one liner inits + setters
   (aka var a = ModifiableFloat.new().set_modifier().set_modifier() )
 - Improve / remove debug option on ModifiableFloat
+  I wote for remove
+- Add args to effect calls (duration, value)
+  Ball.apply('speed', 13, 10)
+
+BUGS
+- Bug with multiple effects ball origin model shown / hidden
+  Same solution as with speed class ig
+- Bug with ball speed falling down for some reason (again)
+- Bug effect randomly extends its own duration
+- Bug with effect visuals (ticking) when set to lower than minimum duration

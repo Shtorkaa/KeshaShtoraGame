@@ -2,9 +2,7 @@ extends StaticBody3D
 class_name Ball
 
 var dir = Vector3.FORWARD
-var speed = 8.0
-var speed_min = 1.0
-var speed_max = 25.0
+var speed = ModifiableFloat.new(8, 0, 35)
 var is_dead = false
 var remove_on_death = [
 	"Hitbox", "Model", 'Effects', # WARNING Required nodes
@@ -59,13 +57,15 @@ func hit(collision:KinematicCollision3D, delta:float) -> void:
 			'you dont wanna deal with this.',
 			'you wanna give up.',
 		].pick_random())
+	elif collider is Paddle:
+		apply('paddle_boost', 1.1)
 
 	print(['Ping', 'Pong'].pick_random())
 	dir = dir.bounce(collision.get_normal())
 	Game.SillyFreeze(0.05)
 	$SoundHit.play()
 	# Tecnically makes it move faster but idc, it fixes the double hit in certain cases
-	move(dir * speed * delta)
+	move(dir * speed.value * delta)
 
 # WARNING Function is not in use, effects {} stays filled with freed objects since effect killes itslef if its a one shot but it cannot call back the ball to remove itself from {} bc it doesnt know its code
 func clear(effect_name:String):
@@ -80,17 +80,17 @@ func apply(effect_name:String, duration:float = 0):
 	var effect
 	
 	if effects.keys().has(effect_name) and 'is_dead' in effects[effect_name] and !effects[effect_name].is_dead:
-		print('Ball effect reset duration')
 		effect = effects[effect_name]
+		print('Ball effect timer refreshed')
 	else:
 		print('Ball effect applied')
 		effect = Game.GetEffect(effect_name)
 		if !effect: return
 		effects[effect_name] = effect
 		$Effects.add_child(effect)
+		effect.set_one_shot(true)
 	
-	effect.set_one_shot(true)
-	effect.apply(duration)
+	effect.start(duration)
 
 # SILLY CHECKS
 
@@ -98,10 +98,6 @@ func has(effect_name:String):
 	return effects.keys().has(effect_name)
 
 # VERY SILLY
-
-func set_speed(value:float):
-	print('Ball speed set to ', value)
-	speed = clamp(value, speed_min, speed_max)
 
 func hide_model(value:bool):
 	print('Ball hidden model set to ', value)
@@ -111,7 +107,7 @@ func hide_model(value:bool):
 
 func _physics_process(delta:float):
 	if    is_dead: return
-	var collision = move(dir * speed * delta)
+	var collision = move(dir * speed.value * delta)
 	if !collision: return
 	hit(collision, delta)
 

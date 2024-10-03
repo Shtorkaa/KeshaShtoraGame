@@ -1,0 +1,56 @@
+[gd_scene load_steps=8 format=3 uid="uid://cufag0jre3eth"]
+
+[ext_resource type="PackedScene" uid="uid://do6ouwg4q84aj" path="res://Objects/effect.tscn" id="1_onee4"]
+[ext_resource type="Script" path="res://Script/Effects/Effect_paddle_boost.gd" id="2_3wtmu"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_ua3sp"]
+shading_mode = 0
+albedo_color = Color(0.648695, 0.755732, 0.822614, 1)
+
+[sub_resource type="SphereMesh" id="SphereMesh_sr4pe"]
+material = SubResource("StandardMaterial3D_ua3sp")
+radial_segments = 6
+rings = 4
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_4insl"]
+shading_mode = 0
+albedo_color = Color(0.710448, 0.792144, 0.776054, 1)
+
+[sub_resource type="SphereMesh" id="SphereMesh_yrnuh"]
+material = SubResource("StandardMaterial3D_4insl")
+radial_segments = 6
+rings = 4
+
+[sub_resource type="Curve" id="Curve_pnx8o"]
+_data = [Vector2(0, 0.677019), 0.0, 0.0, 0, 0, Vector2(0.586466, 1), 0.0, 0.0, 0, 0, Vector2(0.969925, 0), 0.0, 0.0, 0, 0]
+point_count = 3
+
+[node name="Effect" instance=ExtResource("1_onee4")]
+script = ExtResource("2_3wtmu")
+
+[node name="Model" type="MeshInstance3D" parent="." index="0"]
+transform = Transform3D(0.9, 0, 0, 0, 0.9, 0, 0, 0, 0.9, 0, 0, 0)
+mesh = SubResource("SphereMesh_sr4pe")
+skeleton = NodePath("")
+
+[node name="ParticlesActive" type="CPUParticles3D" parent="." index="1"]
+emitting = false
+amount = 16
+one_shot = true
+explosiveness = 1.0
+mesh = SubResource("SphereMesh_yrnuh")
+emission_shape = 1
+emission_sphere_radius = 0.5
+direction = Vector3(0, 1, 0)
+spread = 90.0
+gravity = Vector3(0, -1, 0)
+initial_velocity_min = 1.0
+initial_velocity_max = 5.0
+scale_amount_min = 0.2
+scale_amount_max = 0.5
+scale_amount_curve = SubResource("Curve_pnx8o")
+
+[connection signal="applied" from="." to="." method="_on_applied"]
+[connection signal="cleared" from="." to="." method="_on_cleared"]
+[connection signal="hidden" from="." to="." method="_on_hidden"]
+[connection signal="shown" from="." to="." method="_on_shown"]
