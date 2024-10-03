@@ -147,7 +147,6 @@ func _ready() -> void:
 	
 	FunnySpeed.set_modifier('boots', 8)
 	FunnySpeed.set_modifier('haste_rune', 52.96, ModifiableFloat.operations.percent)
-	FunnySpeed.set_modifier('slowing_mud', -25, ModifiableFloat.operations.percent)
-	FunnySpeed.update_value(true)
+	FunnySpeed.set_modifier('slowing_mud', -25, ModifiableFloat.operations.percent, true)
 	# FunnySpeed.set_modifier('strong_debuff', 6, ModifiableFloat.operations.fixed)
 	# FunnySpeed.remove_modifier('haste_rune')

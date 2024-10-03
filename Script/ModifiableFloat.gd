@@ -44,12 +44,12 @@ func set_truncate_value(new_truncate_value:int) -> void:
 	truncate = new_truncate_value
 	update_value()
 
-func set_modifier(id:String, number:float, operation:String = operations.add) -> void:
+func set_modifier(id:String, number:float, operation:String = operations.add, debug:bool = false) -> void:
 	if not operation in operations.values():
 		push_error('Couldnt determine a modifier operation')
 		return
 	modifiers[id] = { 'value': number, 'operation': operation, }
-	update_value()
+	update_value(debug)
 
 func remove_modifier(id:String):
 	modifiers.erase(id)
