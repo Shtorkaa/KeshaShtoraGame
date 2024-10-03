@@ -5,12 +5,17 @@ var  min_value:float
 var  max_value:float
 var base_value:float
 var   truncate:int
-var     modifiers:Dictionary = {}
-var modifications:Dictionary = {}
 const  operations:Dictionary = {
+	# NOTE Operations are performed top to bottom
 	'add': 'ADDITION',
 	'percent': 'PERCENTAGES',
 	'fixed': 'FIXED_VALUE',
+}
+var     modifiers:Dictionary = {}
+var modifications:Dictionary = {}
+var modifications_base_values:Dictionary = {
+	operations.add: 0.0,
+	operations.percent: 100.0,
 }
 
 signal update
@@ -50,53 +55,70 @@ func remove_modifier(id:String):
 	modifiers.erase(id)
 	update_value()
 
-func clamp_value():
+func clamp_value(debug: bool = false):
 	value = clamp(value, min_value, max_value)
-	print('CLAMPED BETWEEN ', min_value, ' AND ', max_value)
-	truncate_value()
+	if debug: print('CLAMPED WITHIN ', min_value, ' - ', max_value, ' -> ', value)
+	truncate_value(debug)
 
-func truncate_value():
+func truncate_value(debug: bool = false):
 	if truncate >= 0:
 		# Some voodoo magic going on here
 		var factor = pow(10, truncate)
 		value = floor(value * factor) / factor
-	print('TRUNCATE TO ', truncate)
-	print(' -> ', value)
+	if debug: print('TRUNCATING BY ', truncate, ' -> ', value)
+	
+	if debug: print(' -> ', value)
 	update.emit()
 
-func update_value() -> void:
-	value = base_value
-	modifications = {
-		# NOTE Operations are performed top to bottom
-		operations.fixed: null,
-		operations.add: 0.0,
-		operations.percent: 100.0,
-	}
+func calc_modifiers(debug: bool = false):
+	if debug: print(' CALCULATING MODIFICATIONS *')
 	
-	print(modifiers)
+	var new_modifications = {}
 	
+	# Calc modification new values
 	for modifier in modifiers.values():
-		match modifier.operation:
-			operations.fixed:
-				modifications[modifier.operation] = modifier.value
-			_:
-				modifications[modifier.operation] += modifier.value
+		if debug: print('  ', modifier)
 		
-	print(modifications, ', ', value)
+		# Set modification value to base value if they have one
+		if (modifier.operation in modifications_base_values.keys() and
+			not modifier.operation in new_modifications):
+				new_modifications[modifier.operation] = modifications_base_values[modifier.operation]
+		
+		# Perform the calcs based on operation
+		match modifier.operation:
+			# NOTE This part bit complex
+			operations.fixed:
+				new_modifications[modifier.operation] = modifier.value
+			_:
+				new_modifications[modifier.operation] += modifier.value
 	
+	if debug: print('  ', new_modifications)
+	
+	modifications = new_modifications
+
+func update_value(debug: bool = false) -> void:
+	if debug: print('UPDATING VALUE')
+	
+	calc_modifiers(debug)
+	
+	var new_value = base_value
+	if debug: print(' RESET TO BASE VALUE ', value, ' -> ', new_value)
+	
+	if debug: print(' APPLYING MODIFICATIONS **')
 	for modification_type in modifications.keys():
 		var modification_value = modifications[modification_type]
-		# TODO OPTIMISE IT HERE SO THAT IT DOESNT DO modifications'S if their values are default ?
 		if modification_value == null: continue
 		match modification_type:
 			operations.fixed:
-				value = modification_value
+				new_value = modification_value
 				break
 			operations.add:
-				value += modification_value
+				new_value += modification_value
 			operations.percent:
-				value = value / 100 * modification_value
-		print(modification_type, ' ', modification_value, ' -> ', value)
+				new_value = new_value / 100 * modification_value
+		
+		if debug: print('  ', modification_type, ' ', modification_value, ' -> ', new_value)
 	
-	# NOTE Maybe its best not to proceed if the value was not changed actually
-	clamp_value()
+	if debug: print(' UPDATED VALUE ', value, ' -> ', new_value)
+	value = new_value
+	clamp_value(debug)
