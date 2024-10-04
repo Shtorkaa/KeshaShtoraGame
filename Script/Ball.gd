@@ -2,7 +2,7 @@ extends StaticBody3D
 class_name Ball
 
 var dir = Vector3.FORWARD
-var speed = ModifiableFloat.new(8, 0, 35)
+var speed = ModifiableFloat.new(10, 0, 35)
 var is_dead = false
 var remove_on_death = [
 	"Hitbox", "Model", 'Effects', # WARNING Required nodes
@@ -62,6 +62,7 @@ func hit(collision:KinematicCollision3D, delta:float) -> void:
 
 	print(['Ping', 'Pong'].pick_random())
 	dir = dir.bounce(collision.get_normal())
+	
 	Game.SillyFreeze(0.05)
 	$SoundHit.play()
 	# Tecnically makes it move faster but idc, it fixes the double hit in certain cases

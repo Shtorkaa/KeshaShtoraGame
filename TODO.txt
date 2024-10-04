@@ -18,3 +18,5 @@ BUGS
 - Bug with ball speed falling down for some reason (again)
 - Bug effect randomly extends its own duration
 - Bug with effect visuals (ticking) when set to lower than minimum duration
+
+! Ball bounces off of objects using 3 axes, if it bounces by any percent on y it will slow/stop
